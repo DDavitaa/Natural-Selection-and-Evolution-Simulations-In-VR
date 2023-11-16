@@ -1,0 +1,86 @@
+[gd_scene load_steps=17 format=3 uid="uid://dh4plhwin7tg0"]
+
+[ext_resource type="Script" path="res://root.gd" id="1_i8dm5"]
+[ext_resource type="Texture2D" uid="uid://bfshry2vj0wmh" path="res://hdri/evening_road_01_puresky_4k.hdr" id="2_mygj2"]
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="3_xhfq0"]
+[ext_resource type="PackedScene" uid="uid://bdwmserhqai5h" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_hand_low.tscn" id="4_rw863"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="5_cp3fc"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="6_jx705"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="7_1mxod"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="7_g1vwa"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="7_idjpu"]
+[ext_resource type="PackedScene" uid="uid://btf05hjpw6k05" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_hand_low.tscn" id="9_j8qgt"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o1ggq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ipeq"]
+albedo_color = Color(0.117647, 0.239216, 0, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_03mh5"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t654x"]
+panorama = ExtResource("2_mygj2")
+
+[sub_resource type="Sky" id="Sky_2mgdq"]
+sky_material = SubResource("PanoramaSkyMaterial_t654x")
+
+[sub_resource type="Environment" id="Environment_1p101"]
+background_mode = 2
+background_energy_multiplier = 0.78
+sky = SubResource("Sky_2mgdq")
+adjustment_enabled = true
+
+[node name="root" type="Node3D"]
+script = ExtResource("1_i8dm5")
+
+[node name="ground - StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="ground - MeshInstance3D" type="MeshInstance3D" parent="ground - StaticBody3D"]
+mesh = SubResource("PlaneMesh_o1ggq")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_1ipeq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground - StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_03mh5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1p101")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.823343, -0.0840068, -0.561293, 0.337221, 0.867887, 0.364766, 0.456496, -0.489607, 0.742897, -0.546902, 8.07065, 0)
+shadow_enabled = true
+
+[node name="player - origin" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+current = true
+
+[node name="player- camera" type="XRCamera3D" parent="player - origin"]
+
+[node name="VRCommonShaderCache" parent="player - origin/player- camera" instance=ExtResource("3_xhfq0")]
+
+[node name="PlayerBody" parent="player - origin" instance=ExtResource("7_idjpu")]
+eye_forward_offset = 0.513
+
+[node name="player - audioListener" type="AudioListener3D" parent="player - origin"]
+
+[node name="Left - controller" type="XRController3D" parent="player - origin"]
+tracker = &"left_hand"
+
+[node name="MovementDirect" parent="player - origin/Left - controller" instance=ExtResource("6_jx705")]
+strafe = true
+
+[node name="LeftPhysicsHand" parent="player - origin/Left - controller" instance=ExtResource("4_rw863")]
+collision_layer = 131073
+
+[node name="LeftHand - model" parent="player - origin/Left - controller/LeftPhysicsHand" instance=ExtResource("5_cp3fc")]
+
+[node name="Right - controller" type="XRController3D" parent="player - origin"]
+tracker = &"right_hand"
+
+[node name="MovementTurn" parent="player - origin/Right - controller" instance=ExtResource("7_g1vwa")]
+turn_mode = 2
+
+[node name="RightPhysicsHand" parent="player - origin/Right - controller" instance=ExtResource("9_j8qgt")]
+
+[node name="RightHand - model" parent="player - origin/Right - controller/RightPhysicsHand" instance=ExtResource("7_1mxod")]
