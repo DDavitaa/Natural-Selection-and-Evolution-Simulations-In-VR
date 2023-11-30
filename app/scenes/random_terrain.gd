@@ -1,11 +1,8 @@
 @tool
 extends StaticBody3D
 
-@export var xSize:int = 20
-var xSize_set:int
-
-@export var zSize:int = 20
-var zSize_set:int
+@export var size:int = 20
+var size_set:int
 
 @export var yHeight:float = 5
 var yHeight_set:float
@@ -28,9 +25,6 @@ var random_generated = false
 var min_height:float = 0
 var max_height:float = 1
 
-
-
-
 func _ready():
 	generate_terrain(false)
 	
@@ -41,37 +35,37 @@ func generate_terrain(randomize:bool):
 		var rng = RandomNumberGenerator.new()
 		var rand_size = rng.randi_range(30,80)
 		
-		xSize_set = rand_size
-		zSize_set = rand_size
+		size_set = rand_size
 		yHeight_set = snappedf(rng.randf_range(1,5),0.01)
 		freq_set = snappedf(rng.randf_range(0.05,0.15),0.01)
 		seed_set = rng.randi_range(0,100)
 		
 	else:
-		xSize_set = xSize
-		zSize_set = zSize
+		size_set = size
 		yHeight_set = yHeight
 		freq_set = frequency
 		seed_set = seed
 	
+	# initializing variables
 	var a_mesh:ArrayMesh
 	var surftool = SurfaceTool.new()
 	var n = FastNoiseLite.new()
 	
+	# noise settings
 	n.noise_type = FastNoiseLite.TYPE_PERLIN
 	n.frequency = freq_set
-	
 	n.seed = seed_set
 	
+	# creating vertices
 	surftool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	for z in range(zSize_set+1):
-		for x in range(xSize_set+1):
+	for z in range(size_set+1):
+		for x in range(size_set+1):
 			var y:float = n.get_noise_2d(x,z) * yHeight_set
 			
 			var uv = Vector2()
-			uv.x = inverse_lerp(0,xSize_set,x)
-			uv.y = inverse_lerp(0,zSize_set,z)
+			uv.x = inverse_lerp(0,size_set,x)
+			uv.y = inverse_lerp(0,size_set,z)
 			surftool.set_uv(uv)
 			
 			if y < min_height and y != null:
@@ -82,21 +76,198 @@ func generate_terrain(randomize:bool):
 			
 			surftool.add_vertex(Vector3(x,y,z))
 			draw_sphere(Vector3(x,y,z))
-			
 	
+	# adding indexes to vertices
 	var vert = 0
-	for z in zSize_set:
-		for x in xSize_set:
+	for z in size_set:
+		for x in size_set:
 			surftool.add_index(vert)
 			surftool.add_index(vert+1)
-			surftool.add_index(vert+1+xSize_set)
-			surftool.add_index(vert+1+xSize_set)
+			surftool.add_index(vert+1+size_set)
+			surftool.add_index(vert+1+size_set)
 			surftool.add_index(vert+1)
-			surftool.add_index(vert+2+xSize_set)
+			surftool.add_index(vert+2+size_set)
 			vert+=1
 		vert+=1
 		
+		
+	# mesh commited
 	surftool.generate_normals()
+	a_mesh = surftool.commit()
+	
+	# mesh data tool for number of vertices
+	var mdt = MeshDataTool.new()
+	mdt.create_from_surface(a_mesh,0)
+	var vertCount = mdt.get_vertex_count() 
+	print(vertCount)
+	
+	for z in range(size_set+1):
+		var y:float = -5
+		surftool.add_vertex(Vector3(0,y,z))
+		surftool.add_vertex(Vector3(size_set,y,z))
+		draw_sphere(Vector3(0,y,z))
+		draw_sphere(Vector3(size_set,y,z))
+		
+	for x in range(size_set+1):
+		var y:float = -5
+		surftool.add_vertex(Vector3(x,y,0))
+		surftool.add_vertex(Vector3(x,y,size_set))
+		draw_sphere(Vector3(x,y,0))
+		draw_sphere(Vector3(x,y,size_set))
+	
+	# initiating variables with very specific formulae to connect the mesh together
+	var halfSize:float = size_set/2.0
+	
+	var vertTopX1 = 4
+	var vertBottomX1 = snappedf(vertCount/halfSize,1)
+	
+	var vertTopZ = size_set*2+2
+	var vertBottomZ = 4
+	
+	var vertTopX2 = -1
+	var vertBottomX2 = size_set * 2 + 3
+	
+	var vertTopZ2 = 2
+	var vertBottomZ2 = size_set+1
+	
+	
+	
+	# manually make first four triangles as they cant be iterated through on x axis side 1
+	surftool.add_index(0)
+	surftool.add_index(vertCount)
+	surftool.add_index(1)
+	
+	surftool.add_index(1)
+	surftool.add_index(vertCount)
+	surftool.add_index(vertCount+vertBottomX1)
+	
+	surftool.add_index(1)
+	surftool.add_index(vertCount+vertBottomX1)
+	surftool.add_index(4)
+	
+	surftool.add_index(4)
+	surftool.add_index(vertCount+vertBottomX1)
+	surftool.add_index(vertCount+vertBottomX1+2)
+	
+	vertBottomX1 += 2
+	
+	# manually make first four triangles as they cant be iterated through on z axis side 1
+	surftool.add_index(2)
+	surftool.add_index(vertCount+0)
+	surftool.add_index(0)
+	
+	surftool.add_index(2)
+	surftool.add_index(vertCount+2)
+	surftool.add_index(vertCount)
+	
+	surftool.add_index(vertTopZ)
+	surftool.add_index(vertCount+2)
+	surftool.add_index(2)
+	
+	surftool.add_index(vertTopZ)
+	surftool.add_index(vertCount+4)
+	surftool.add_index(vertCount+2)
+	
+	# manually make first four triangles as they cant be iterated through on x axis side 2
+	surftool.add_index(vertCount+vertTopX2)
+	surftool.add_index(vertCount+size_set*2+vertBottomX2)
+	surftool.add_index(vertCount+vertTopX2-1)
+	surftool.add_index(vertCount+vertTopX2-1)
+	surftool.add_index(vertCount+size_set*2+vertBottomX2)
+	surftool.add_index(vertCount+size_set*2+vertBottomX2-2)
+	vertTopX2 -= 1
+	vertBottomX2 -= 2
+	surftool.add_index(vertCount+vertTopX2)
+	surftool.add_index(vertCount+size_set*2+vertBottomX2)
+	surftool.add_index(vertCount+vertTopX2-1)
+	surftool.add_index(vertCount+vertTopX2-1)
+	surftool.add_index(vertCount+size_set*2+vertBottomX2)
+	surftool.add_index(vertCount+size_set*2+vertBottomX2-2)
+	vertTopX2 -= 1
+	vertBottomX2 -= 2
+	
+	# manually make first four triangles as they cant be iterated through on z axis side 2
+	surftool.add_index(vertCount-1) #top
+	surftool.add_index(vertCount+size_set+vertBottomZ2-2) #bottom
+	surftool.add_index(vertCount+size_set+vertBottomZ2) #bottom
+	
+	surftool.add_index(vertCount-1) #top
+	surftool.add_index(vertCount-size_set-2) #top
+	surftool.add_index(vertCount+size_set+vertBottomZ2-2) #bottom
+	
+	vertBottomZ2 -= 2
+	
+	surftool.add_index(vertCount-size_set-2)
+	surftool.add_index(vertCount+size_set+vertBottomZ2-2)
+	surftool.add_index(vertCount+size_set+vertBottomZ2)
+	
+	surftool.add_index(vertCount-size_set-2)
+	surftool.add_index(vertCount-size_set*2-3)
+	surftool.add_index(vertCount+size_set+vertBottomZ2-2)
+	
+	vertBottomZ2 -= 2
+	
+	for i in size_set-2:
+		#x side 1
+		surftool.add_index(vertTopX1)
+		surftool.add_index(vertCount+vertBottomX1)
+		surftool.add_index(vertTopX1+2)
+		
+		surftool.add_index(vertTopX1+2)
+		surftool.add_index(vertCount+vertBottomX1)
+		surftool.add_index(vertCount+vertBottomX1+2)
+		
+		vertTopX1 +=2
+		vertBottomX1 +=2
+		
+		#z side 1
+		surftool.add_index(vertTopZ+size_set+1)
+		surftool.add_index(vertCount+vertBottomZ)
+		surftool.add_index(vertTopZ)
+
+		surftool.add_index(vertTopZ+size_set+1)
+		surftool.add_index(vertCount+vertBottomZ+2)
+		surftool.add_index(vertCount+vertBottomZ)
+		
+		vertTopZ += size_set+1
+		vertBottomZ += 2
+		
+		#x side 2
+		surftool.add_index(vertCount+vertTopX2)
+		surftool.add_index(vertCount+size_set*2+vertBottomX2)
+		surftool.add_index(vertCount+vertTopX2-1)
+		
+		surftool.add_index(vertCount+vertTopX2-1)
+		surftool.add_index(vertCount+size_set*2+vertBottomX2)
+		surftool.add_index(vertCount+size_set*2+vertBottomX2-2)
+		
+		vertTopX2 -= 1
+		vertBottomX2 -= 2
+		
+		#z side 2
+		surftool.add_index(vertCount-size_set*vertTopZ2-vertTopZ2-1)
+		surftool.add_index(vertCount+size_set+vertBottomZ2-2)
+		surftool.add_index(vertCount+size_set+vertBottomZ2)
+		
+		surftool.add_index(vertCount-size_set*vertTopZ2-vertTopZ2-1)
+		surftool.add_index(vertCount-size_set*(vertTopZ2+1)-vertTopZ2-2)
+		surftool.add_index(vertCount+size_set+vertBottomZ2-2)
+		
+		if i < size_set-4:
+			vertTopZ2 += 1
+			vertBottomZ2 -= 2
+			
+	
+	vertTopZ2 += 1
+	vertBottomZ2 -= 2
+	surftool.add_index(vertCount-size_set*vertTopZ2-vertTopZ2-1)
+	surftool.add_index(vertCount+size_set+vertBottomZ2-2)
+	surftool.add_index(vertCount+size_set+vertBottomZ2)
+	
+	surftool.add_index(vertCount-size_set*vertTopZ2-vertTopZ2-1)
+	surftool.add_index(size_set*2)
+	surftool.add_index(vertCount+size_set+vertBottomZ2-2)
+	
 	a_mesh = surftool.commit()
 	
 	terrain_mesh.mesh = a_mesh
@@ -108,7 +279,7 @@ func generate_terrain(randomize:bool):
 	
 	position = Vector3(0,yHeight_set,0) - aabb.get_center()
 	
-	print(draw_sphere(aabb.get_center()))
+	vertCount = mdt.get_vertex_count() 
 	
 
 func update_shader():
@@ -154,7 +325,7 @@ func _process(delta):
 		random_generated = true
 		
 	if !random_generated:
-		if xSize != xSize_set || zSize != zSize_set || yHeight != yHeight_set || frequency != freq_set ||seed != seed_set:
+		if size != size_set || yHeight != yHeight_set || frequency != freq_set ||seed != seed_set:
 			refresh_terrain(false)
 		
 	if (vertices_visibility == false):
@@ -167,8 +338,6 @@ func _process(delta):
 		for i in get_children():
 			if("MeshInstance3D" in i.name):
 				i.visible = true
-				
-	#########TODO: adjust pos of staticbody to keep origin at center
 	
 	position.y = yHeight_set
 	
