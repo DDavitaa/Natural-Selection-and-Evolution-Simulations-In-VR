@@ -19,16 +19,25 @@ var seed_set:int
 @export var generate_random = false
 var random_generated = false
 
-@onready var terrain_mesh = $terrain_mesh
+@onready var terrain_mesh = $"NavigationRegion3D/terrain_mesh"
 @onready var terrain_collision = $terrain_collision
-@onready var scatter = get_node("../../ProtonScatter/ScatterShape")
+@onready var food = $"../Food"
 
 var min_height:float = 0
 var max_height:float = 1
 
+
+
+
+
 func _ready():
 	generate_terrain(false)
-	
+
+
+
+
+
+
 
 func generate_terrain(randomize:bool):
 	
@@ -280,8 +289,12 @@ func generate_terrain(randomize:bool):
 	var aabb:AABB = surftool.get_aabb()
 	position = Vector3(0,yHeight_set,0) - aabb.get_center()
 	
-	get_node("../../ProtonScatter/ScatterShape").scale = Vector3(size_set,1,size_set)
+	get_node("../ProtonScatter/ScatterShape").scale = Vector3(size_set,1,size_set)
+	get_node("NavigationRegion3D").bake_navigation_mesh()
 	
+
+
+
 
 func update_shader():
 	var mat = terrain_mesh.get_active_material(0)
@@ -296,7 +309,6 @@ func draw_sphere(pos:Vector3):
 	sphere.radius = 0.1
 	sphere.height = 0.2
 	ins.mesh = sphere
-	
 
 func refresh_terrain(randomize:bool):
 	for i in get_children():
@@ -304,9 +316,12 @@ func refresh_terrain(randomize:bool):
 			i.free()
 			
 	generate_terrain(randomize)
-	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
+
+
+
 func _process(delta):
 	if delete_terrain:
 		for i in get_children():
@@ -341,6 +356,12 @@ func _process(delta):
 				i.visible = true
 	
 	position.y = yHeight_set
-	
-	
-	
+
+
+
+
+
+
+
+func _physics_process(delta):
+	get_tree().call_group("creatures_1","update_target_location",food.transform.origin)

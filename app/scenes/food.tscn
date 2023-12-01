@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwdsi0mtna8jm"]
+
+[ext_resource type="Script" path="res://scenes/food.gd" id="1_gk8fa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7ct8d"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_o4gp1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7jsq"]
+albedo_color = Color(1, 0.396078, 0.968627, 1)
+
+[node name="Food" type="Area3D"]
+script = ExtResource("1_gk8fa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7ct8d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("SphereMesh_o4gp1")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_t7jsq")

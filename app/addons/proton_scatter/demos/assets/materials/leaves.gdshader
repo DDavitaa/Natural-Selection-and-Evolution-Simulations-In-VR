@@ -28,11 +28,6 @@ void vertex() {
 	float wind = texture(texture_noise, panning_uv).r * 2.0 - 0.4;
 	color = texture(texture_noise, uv).r;
 	
-	float wind_influence = smoothstep(0, 1, 1.0 - UV.y);
-	vec2 wind_offset = -wind_direction * wind_strength * wind_influence * wind;
-	world_pos.xz += wind_offset;
-	world_pos.y -= wind * wind_influence * wind_strength * 0.45;
-	
 	vec4 local_pos = inverse(MODEL_MATRIX) * world_pos;
 	
 	VERTEX = local_pos.xyz;
