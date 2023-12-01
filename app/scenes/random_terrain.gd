@@ -21,6 +21,7 @@ var random_generated = false
 
 @onready var terrain_mesh = $terrain_mesh
 @onready var terrain_collision = $terrain_collision
+@onready var scatter = get_node("../../ProtonScatter/ScatterShape")
 
 var min_height:float = 0
 var max_height:float = 1
@@ -275,11 +276,11 @@ func generate_terrain(randomize:bool):
 	
 	update_shader()
 	
+	# align center of mesh to origin
 	var aabb:AABB = surftool.get_aabb()
-	
 	position = Vector3(0,yHeight_set,0) - aabb.get_center()
 	
-	vertCount = mdt.get_vertex_count() 
+	get_node("../../ProtonScatter/ScatterShape").scale = Vector3(size_set,1,size_set)
 	
 
 func update_shader():
