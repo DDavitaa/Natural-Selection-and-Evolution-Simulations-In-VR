@@ -3,7 +3,7 @@ extends Node3D
 @onready var left_controller = get_node("../../left_controller/")
 @onready var right_controller = get_node("../../right_controller/")
 
-@onready var sim_world = get_node("../../../terrain_origin")
+@onready var sim_world = get_node("../../../simulation_origin")
 
 var scale_step:float = 0.05
 var max_scale = 1.0  # Adjust this value as needed

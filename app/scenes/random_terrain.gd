@@ -1,48 +1,131 @@
 @tool
 extends StaticBody3D
 
+# export variables
+@export_group("Terrain")
 @export var size:int = 20
-var size_set:int
-
 @export var yHeight:float = 5
-var yHeight_set:float
-
 @export var frequency:float = 0.1
-var freq_set:float
-
 @export var seed:int = 0
-var seed_set:int
 
-@export var delete_terrain = false
+
 @export var update = false
 @export var vertices_visibility = false
 @export var generate_random = false
+
+@export_group("Creature and Food")
+@export var creature_amount:int = 3
+@export var food_amount:int = 3
+
+
 var random_generated = false
+var size_set:int
+var yHeight_set:float
+var freq_set:float
+var seed_set:int
+
+var creature_amount_set:int
+var food_amount_set:int
+
+var vertCount:int
+var creature_scene
+var food_scene
+
+# nodes as variables
+@onready var sim_world = $".."
 
 @onready var terrain_mesh = $"NavigationRegion3D/terrain_mesh"
 @onready var terrain_collision = $terrain_collision
-@onready var food = $"../Food"
 
+
+
+# for shaders
 var min_height:float = 0
 var max_height:float = 1
 
-
+var rng = RandomNumberGenerator.new()
+var mdt = MeshDataTool.new()
 
 
 
 func _ready():
-	generate_terrain(false)
+	refresh_terrain(false)
+
+func refresh_terrain(randomize:bool):
+	for i in get_children():
+		if "MeshInstance3D" in i.name:
+			i.free()
+		elif "creature" in i.name:
+			i.free()
+		elif "CharacterBody3D" in i.name:
+			i.free()
+		elif "Area3D" in i.name:
+			i.free()
+		elif "food" in i.name:
+			i.free()
+		
+
+	generate_terrain(randomize)
+	generate_creatures()
+	generate_food()
 
 
+func generate_creatures():
+	creature_amount_set = creature_amount
+	
+	
+	
+	if creature_scene == null:
+		creature_scene = preload("res://scenes/creature.tscn")
+	
+	for i in creature_amount_set:
+		gen_one_creature(creature_scene)
+	
+	
+func generate_food():
+	food_amount_set = food_amount
+	
+	
+	
+	if food_scene == null:
+		food_scene = preload("res://scenes/food.tscn")
+	
+	for i in food_amount_set:
+		gen_one_creature(food_scene)
+	
 
+func gen_one_creature(creature_scene):
+	var creature_instance = creature_scene.instantiate()
+		
+	add_child.call_deferred(creature_instance)
+	
+	var randVert:Vector3 = mdt.get_vertex(randi_range(0,vertCount))
+	randVert.y += 0.2
+	creature_instance.global_position = randVert
+	
+	var creature_scale = 0.2
+	creature_instance.scale = Vector3(creature_scale,creature_scale,creature_scale)
+	
+	var randRot:Vector3 = Vector3(0,randf_range(0,360),0)
+	creature_instance.rotation_degrees = randRot
 
-
-
+func gen_one_food(food_scene):
+	var food_instance = food_scene.instantiate()
+		
+	add_child.call_deferred(food_instance)
+	
+	var randVert:Vector3 = mdt.get_vertex(randi_range(0,vertCount))
+	
+	randVert.y += 0.1
+	food_instance.global_position = randVert
+	
+	var food_scale = 0.1
+	food_instance.scale = Vector3(food_scale,food_scale,food_scale)
 
 func generate_terrain(randomize:bool):
 	
 	if randomize:
-		var rng = RandomNumberGenerator.new()
+		
 		var rand_size = rng.randi_range(30,80)
 		
 		size_set = rand_size
@@ -55,6 +138,7 @@ func generate_terrain(randomize:bool):
 		yHeight_set = yHeight
 		freq_set = frequency
 		seed_set = seed
+		
 	
 	# initializing variables
 	var a_mesh:ArrayMesh
@@ -106,9 +190,8 @@ func generate_terrain(randomize:bool):
 	a_mesh = surftool.commit()
 	
 	# mesh data tool for number of vertices
-	var mdt = MeshDataTool.new()
 	mdt.create_from_surface(a_mesh,0)
-	var vertCount = mdt.get_vertex_count() 
+	vertCount = mdt.get_vertex_count()
 	print(vertCount)
 	
 	for z in range(size_set+1):
@@ -289,7 +372,7 @@ func generate_terrain(randomize:bool):
 	var aabb:AABB = surftool.get_aabb()
 	position = Vector3(0,yHeight_set,0) - aabb.get_center()
 	
-	get_node("../ProtonScatter/ScatterShape").scale = Vector3(size_set,1,size_set)
+	get_node("../ProtonScatter/ScatterShape").scale = Vector3(size_set-1,1,size_set-1)
 	get_node("NavigationRegion3D").bake_navigation_mesh()
 	
 
@@ -310,12 +393,7 @@ func draw_sphere(pos:Vector3):
 	sphere.height = 0.2
 	ins.mesh = sphere
 
-func refresh_terrain(randomize:bool):
-	for i in get_children():
-		if "MeshInstance3D" in i.name:
-			i.free()
-			
-	generate_terrain(randomize)
+
 
 
 
@@ -323,12 +401,6 @@ func refresh_terrain(randomize:bool):
 
 
 func _process(delta):
-	if delete_terrain:
-		for i in get_children():
-			if "MeshInstance3D" in i.name:
-				i.free()
-		delete_terrain = false
-	
 	if update:
 		refresh_terrain(false)
 		update = false
@@ -341,10 +413,10 @@ func _process(delta):
 		random_generated = true
 		
 	if !random_generated:
-		if size != size_set || yHeight != yHeight_set || frequency != freq_set ||seed != seed_set:
+		if size != size_set || yHeight != yHeight_set || frequency != freq_set || seed != seed_set:
 			refresh_terrain(false)
 		
-	if (vertices_visibility == false):
+	if vertices_visibility == false:
 		var j = 1
 		for i in get_children():
 			if("MeshInstance3D" in i.name):
@@ -355,13 +427,9 @@ func _process(delta):
 			if("MeshInstance3D" in i.name):
 				i.visible = true
 	
-	position.y = yHeight_set
+	position.y = yHeight_set - yHeight_set/2
+	
+	#TODO: whenever food is picked up place again after certain amount of time
 
 
 
-
-
-
-
-func _physics_process(delta):
-	get_tree().call_group("creatures_1","update_target_location",food.transform.origin)

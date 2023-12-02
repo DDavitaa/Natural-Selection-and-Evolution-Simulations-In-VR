@@ -18,6 +18,11 @@ config/icon="res://icon.svg"
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 
+[display]
+
+window/size/viewport_width=1440
+window/size/viewport_height=810
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/proton_scatter/plugin.cfg")
