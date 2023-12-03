@@ -28,12 +28,12 @@ mesh = SubResource("CapsuleMesh_jci1r")
 surface_material_override/0 = SubResource("StandardMaterial3D_u24ih")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.195031, 0.487394, 0.457805)
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.195, 0.487, -0.447)
 mesh = SubResource("SphereMesh_fp4ye")
 surface_material_override/0 = SubResource("StandardMaterial3D_7n4n8")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0.195, 0.487, 0.458)
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0.195, 0.487, -0.447)
 mesh = SubResource("SphereMesh_fp4ye")
 surface_material_override/0 = SubResource("StandardMaterial3D_7n4n8")
 
@@ -46,3 +46,4 @@ path_height_offset = 0.5
 shape = SubResource("SphereShape3D_koe63")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
