@@ -2,20 +2,24 @@
 
 [ext_resource type="Script" path="res://scenes/food.gd" id="1_gk8fa"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7ct8d"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c64pg"]
+height = 1.5399
+radius = 1.1295
 
 [sub_resource type="SphereMesh" id="SphereMesh_o4gp1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7jsq"]
 albedo_color = Color(1, 0.396078, 0.968627, 1)
 
-[node name="food" type="Area3D"]
+[node name="food" type="Area3D" groups=["food_area"]]
 script = ExtResource("1_gk8fa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_7ct8d")
+shape = SubResource("CylinderShape3D_c64pg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("SphereMesh_o4gp1")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_t7jsq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

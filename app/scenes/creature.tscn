@@ -6,18 +6,19 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jci1r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u24ih"]
-albedo_color = Color(1, 0.360784, 0.0588235, 1)
-
 [sub_resource type="SphereMesh" id="SphereMesh_fp4ye"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n4n8"]
 albedo_color = Color(0, 0.768627, 0.894118, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_koe63"]
-radius = 11.0107
+radius = 11.7565
 
-[node name="creature" type="CharacterBody3D" groups=["creatures_1"]]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i785h"]
+height = 2.15301
+radius = 2.02109
+
+[node name="creature" type="CharacterBody3D" groups=["creatures"]]
 script = ExtResource("1_g1v3g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -25,7 +26,6 @@ shape = SubResource("CapsuleShape3D_l0wa4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("CapsuleMesh_jci1r")
-surface_material_override/0 = SubResource("StandardMaterial3D_u24ih")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.195, 0.487, -0.447)
@@ -40,10 +40,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7n4n8")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.5
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["creature_area"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_koe63")
 
+[node name="Area3D2" type="Area3D" parent="." groups=["creature_touch"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("CylinderShape3D_i785h")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]

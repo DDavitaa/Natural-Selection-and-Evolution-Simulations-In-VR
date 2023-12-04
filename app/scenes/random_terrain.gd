@@ -17,6 +17,7 @@ extends StaticBody3D
 @export var creature_amount:int = 3
 @export var food_amount:int = 3
 
+var countName:int = 0;
 
 var random_generated = false
 var size_set:int
@@ -25,7 +26,9 @@ var freq_set:float
 var seed_set:int
 
 var creature_amount_set:int
+var creature_amount_check:int = 0
 var food_amount_set:int
+var food_amount_check:int = 0
 
 var vertCount:int
 var creature_scene
@@ -68,12 +71,10 @@ func refresh_terrain(randomize:bool):
 	generate_terrain(randomize)
 	generate_creatures()
 	generate_food()
-
-
+	
 func generate_creatures():
 	creature_amount_set = creature_amount
-	
-	
+	creature_amount_check = creature_amount_set
 	
 	if creature_scene == null:
 		creature_scene = preload("res://scenes/creature.tscn")
@@ -84,8 +85,7 @@ func generate_creatures():
 	
 func generate_food():
 	food_amount_set = food_amount
-	
-	
+	food_amount_check = food_amount_set
 	
 	if food_scene == null:
 		food_scene = preload("res://scenes/food.tscn")
@@ -96,12 +96,12 @@ func generate_food():
 
 func gen_one_creature(creature_scene):
 	var creature_instance = creature_scene.instantiate()
-		
-	add_child.call_deferred(creature_instance)
+	
+	add_child(creature_instance)
 	
 	var randVert:Vector3 = mdt.get_vertex(randi_range(0,vertCount))
 	randVert.y += 0.2
-	creature_instance.global_position = randVert
+	creature_instance.position = randVert
 	
 	var creature_scale = 0.2
 	creature_instance.scale = Vector3(creature_scale,creature_scale,creature_scale)
@@ -111,16 +111,17 @@ func gen_one_creature(creature_scene):
 
 func gen_one_food(food_scene):
 	var food_instance = food_scene.instantiate()
-		
-	add_child.call_deferred(food_instance)
+	
+	add_child(food_instance)
 	
 	var randVert:Vector3 = mdt.get_vertex(randi_range(0,vertCount))
 	
 	randVert.y += 0.1
-	food_instance.global_position = randVert
+	food_instance.position = randVert
 	
 	var food_scale = 0.1
 	food_instance.scale = Vector3(food_scale,food_scale,food_scale)
+
 
 func generate_terrain(randomize:bool):
 	
@@ -376,9 +377,6 @@ func generate_terrain(randomize:bool):
 	get_node("NavigationRegion3D").bake_navigation_mesh()
 	
 
-
-
-
 func update_shader():
 	var mat = terrain_mesh.get_active_material(0)
 	mat.set_shader_parameter("min_height",min_height)
@@ -392,13 +390,6 @@ func draw_sphere(pos:Vector3):
 	sphere.radius = 0.1
 	sphere.height = 0.2
 	ins.mesh = sphere
-
-
-
-
-
-
-
 
 func _process(delta):
 	if update:
@@ -428,8 +419,10 @@ func _process(delta):
 				i.visible = true
 	
 	position.y = yHeight_set - yHeight_set/2
-	
-	#TODO: whenever food is picked up place again after certain amount of time
+			
+	if food_amount_check < food_amount_set:
+		gen_one_food(food_scene)
+		food_amount_check += 1
 
 
 

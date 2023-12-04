@@ -1,6 +1,8 @@
 extends Node3D
 
 var xr_interface: XRInterface
+
+var is_using_xr:bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -13,8 +15,10 @@ func _ready():
 
 		# Change our main viewport to output to the HMD
 		get_viewport().use_xr = true
+		is_using_xr = true
 	else:
 		print("OpenXR not initialized, please check if your headset is connected")
+		is_using_xr = false
  
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,10 +1,16 @@
 extends Area3D
 
+@onready var terrain = get_node("../")
 
+var sound = AudioStreamPlayer3D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	add_child(sound)
+	sound.volume_db = -15.0
+	sound.stream = load("res://audio/pop-up-something-160353.mp3")
+	sound.playing = true
+	sound.emission_angle_enabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -12,6 +18,16 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body.name == "creature":
-		self.free()
+	if body.is_in_group("creatures"):
 		
+		
+		
+		#sound.stream = AudioStreamWAV.new()
+		#sound.stream.resource_path = load("res://audio/659677__matrixxx__shiny-object-of-value.wav")
+		
+		sound.play()
+		body.get_node("CollisionShape3D").scale += Vector3(0.3,0.3,0.3)
+		body.SPEED += 0.1
+		terrain.food_amount_check -= 1
+		
+		queue_free()
