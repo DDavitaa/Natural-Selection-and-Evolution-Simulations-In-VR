@@ -137,7 +137,7 @@ func _on_area_3d_body_entered(body):
 				if !run_from_creature:
 					kill_creature = rand_trueFalse()
 					otherCreature = body
-					
+				kill_creature = false
 			elif self.scale < body.scale:
 				if body.kill_creature:
 					otherCreature = body
