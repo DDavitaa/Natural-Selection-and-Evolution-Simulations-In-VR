@@ -103,7 +103,7 @@ func _process(delta):
 	
 	label.rotate_object_local(Vector3.UP, PI)
 	
-	label.text = "SCALE: " + str(snappedf($CollisionShape3D.scale.y,0.00)) + "\nSPEED: " + str(SPEED) + "\nkilling: " + str(kill_creature) + "\nrunning_away: " + str(run_from_creature)
+	label.text = "SCALE: " + str(snappedf($CollisionShape3D.scale.y,0.01)) + "\nSPEED: " + str(SPEED) + "\nkilling: " + str(kill_creature) + "\nrunning_away: " + str(run_from_creature)
 	
 func update_target_location(target_location):
 	get_node("NavigationAgent3D").set_target_position(target_location)
@@ -133,31 +133,35 @@ func _on_area_3d_area_exited(area):
 func _on_area_3d_body_entered(body):
 	if otherCreature_location == Vector3.ZERO:
 		if body.is_in_group("creatures"):
-			if scale > body.scale:
+			if self.scale > body.scale:
 				if !run_from_creature:
-					otherCreature = body
 					kill_creature = rand_trueFalse()
-			elif scale < body.scale:
+					otherCreature = body
+					
+			elif self.scale < body.scale:
 				if body.kill_creature:
 					otherCreature = body
 					run_from_creature = true
 					kill_creature = false
 					
-			else:
-				pass
+			elif self.scale == body.scale:
+				kill_creature = false
+				run_from_creature = false
 
 func _on_area_3d_body_exited(body):
 	if body.is_in_group("creatures"):
-		if scale > body.scale:
+		if self.scale > body.scale:
 			$CollisionShape3D/MeshInstance3D.get_surface_override_material(0).albedo_color = Color(0.659, 0.388, 0.176) 
 			kill_creature = false
 			otherCreature = null
-		elif scale < body.scale:
+		elif self.scale < body.scale:
 			$CollisionShape3D/MeshInstance3D.get_surface_override_material(0).albedo_color = Color(0.659, 0.388, 0.176)
 			run_from_creature = false
 			otherCreature = null
-		else:
-			pass
+		elif self.scale == body.scale:
+			kill_creature = false
+			run_from_creature = false
+			
 
 # if creature has collided with another creature
 func _on_area_3d_2_body_entered(body):
