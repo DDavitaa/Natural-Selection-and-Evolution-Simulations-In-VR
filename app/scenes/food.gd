@@ -20,11 +20,6 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("creatures"):
 		
-		
-		
-		#sound.stream = AudioStreamWAV.new()
-		#sound.stream.resource_path = load("res://audio/659677__matrixxx__shiny-object-of-value.wav")
-		
 		sound.play()
 		body.get_node("CollisionShape3D").scale += Vector3(0.3,0.3,0.3)
 		body.SPEED += 0.1

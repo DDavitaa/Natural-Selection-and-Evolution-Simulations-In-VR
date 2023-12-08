@@ -26,7 +26,6 @@ var otherCreature:CharacterBody3D
 var rng = RandomNumberGenerator.new()
 var label = Label3D.new()
 var creature_color = StandardMaterial3D.new()
-var sound = AudioStreamPlayer3D.new()
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -37,12 +36,6 @@ func _ready():
 	
 	creature_color.albedo_color = Color(0.659, 0.388, 0.176)
 	$CollisionShape3D/MeshInstance3D.set_surface_override_material(0,creature_color)
-	
-	add_child(sound)
-	sound.volume_db = -15.0
-	sound.stream = load("res://audio/523769__matrixxx__retro-hit.wav")
-	sound.playing = true
-	#sound.emission_angle_enabled = true
 	
 
 func _physics_process(delta):
@@ -137,7 +130,8 @@ func _on_area_3d_body_entered(body):
 				if !run_from_creature:
 					kill_creature = rand_trueFalse()
 					otherCreature = body
-				kill_creature = false
+				else:
+					kill_creature = false
 			elif self.scale < body.scale:
 				if body.kill_creature:
 					otherCreature = body
@@ -167,5 +161,4 @@ func _on_area_3d_body_exited(body):
 func _on_area_3d_2_body_entered(body):
 	if body.is_in_group("creatures"):
 		if body.scale > scale && body.kill_creature == true:
-			sound.play()
 			queue_free()

@@ -8,7 +8,6 @@ extends StaticBody3D
 @export var frequency:float = 0.1
 @export var seed:int = 0
 
-
 @export var update = false
 @export var vertices_visibility = false
 @export var generate_random = false
@@ -83,17 +82,6 @@ func generate_creatures():
 		gen_one_creature(creature_scene)
 	
 	
-func generate_food():
-	food_amount_set = food_amount
-	food_amount_check = food_amount_set
-	
-	if food_scene == null:
-		food_scene = preload("res://scenes/food.tscn")
-	
-	for i in food_amount_set:
-		gen_one_creature(food_scene)
-	
-
 func gen_one_creature(creature_scene):
 	var creature_instance = creature_scene.instantiate()
 	
@@ -108,6 +96,17 @@ func gen_one_creature(creature_scene):
 	
 	var randRot:Vector3 = Vector3(0,randf_range(0,360),0)
 	creature_instance.rotation_degrees = randRot
+
+func generate_food():
+	food_amount_set = food_amount
+	food_amount_check = food_amount_set
+	
+	if food_scene == null:
+		food_scene = preload("res://scenes/food.tscn")
+	
+	for i in food_amount_set:
+		gen_one_creature(food_scene)
+	
 
 func gen_one_food(food_scene):
 	var food_instance = food_scene.instantiate()
@@ -126,14 +125,10 @@ func gen_one_food(food_scene):
 func generate_terrain(randomize:bool):
 	
 	if randomize:
-		
-		var rand_size = rng.randi_range(30,80)
-		
-		size_set = rand_size
+		size_set = rng.randi_range(30,80)
 		yHeight_set = snappedf(rng.randf_range(1,5),0.01)
 		freq_set = snappedf(rng.randf_range(0.05,0.15),0.01)
 		seed_set = rng.randi_range(0,100)
-		
 	else:
 		size_set = size
 		yHeight_set = yHeight
@@ -379,8 +374,8 @@ func generate_terrain(randomize:bool):
 
 func update_shader():
 	var mat = terrain_mesh.get_active_material(0)
-	mat.set_shader_parameter("min_height",min_height)
-	mat.set_shader_parameter("max_height",max_height)
+	mat.set_shader_parameter("min_grass_height",min_height)
+	mat.set_shader_parameter("max_gravel_height",max_height)
 
 func draw_sphere(pos:Vector3):
 	var ins = MeshInstance3D.new()
@@ -397,7 +392,6 @@ func _process(delta):
 		update = false
 		random_generated = false
 	
-		
 	if generate_random:
 		refresh_terrain(true)
 		generate_random = false
