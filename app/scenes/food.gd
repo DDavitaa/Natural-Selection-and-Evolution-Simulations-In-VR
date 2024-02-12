@@ -21,7 +21,7 @@ func _on_body_entered(body):
 	if body.is_in_group("creatures"):
 		
 		sound.play()
-		body.get_node("CollisionShape3D").scale += Vector3(0.3,0.3,0.3)
+		body.scale += Vector3(0.1,0.1,0.1)
 		body.SPEED += 0.1
 		terrain.food_amount_check -= 1
 		

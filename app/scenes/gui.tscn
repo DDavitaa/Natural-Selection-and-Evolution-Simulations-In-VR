@@ -1,0 +1,257 @@
+[gd_scene load_steps=7 format=3 uid="uid://dm616if5mhby4"]
+
+[ext_resource type="Script" path="res://scenes/slider.gd" id="1_1vovs"]
+[ext_resource type="Script" path="res://scenes/sliderLabel.gd" id="2_d83j5"]
+
+[sub_resource type="Theme" id="Theme_fmwm8"]
+default_font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqg62"]
+font_size = 60
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ps7u7"]
+color = Color(0.5103, 0.616035, 0.63, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcwgu"]
+bg_color = Color(0.180392, 0.333333, 0.419608, 1)
+shadow_size = 10
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_fmwm8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 793.0
+offset_bottom = 809.0
+color = Color(0.243137, 0.329412, 0.341176, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 789.0
+offset_bottom = 181.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Edit Parameters"
+label_settings = SubResource("LabelSettings_nqg62")
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 21
+theme_override_styles/separator = SubResource("StyleBoxLine_ps7u7")
+
+[node name="TAB_CONTAINER" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+
+[node name="Creatures" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Margin_Amount" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit_Amount" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Margin_Amount"]
+layout_mode = 2
+split_offset = 360
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Margin_Amount/HSplit_Amount"]
+layout_mode = 2
+text = "Creature Amount"
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Margin_Amount/HSplit_Amount"]
+layout_mode = 2
+value = 10.0
+alignment = 1
+
+[node name="Environment" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+layout_mode = 2
+
+[node name="Panel_TG" type="PanelContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rcwgu")
+
+[node name="Margin_TG" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Panel_TG"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Title_TG" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Panel_TG/Margin_TG"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Terrain Generation"
+horizontal_alignment = 1
+
+[node name="Margin_Size" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit_Size" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size"]
+layout_mode = 2
+split_offset = 360
+dragger_visibility = 1
+
+[node name="Label_Size" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size"]
+layout_mode = 2
+text = "Size of Environment"
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size"]
+layout_mode = 2
+min_value = 10.0
+max_value = 80.0
+value = 30.0
+alignment = 1
+suffix = "units"
+
+[node name="Margin_Height" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit_Height" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height"]
+layout_mode = 2
+split_offset = 360
+
+[node name="Label_Height" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height"]
+layout_mode = 2
+text = "Height of Environment"
+
+[node name="HSplit_Height" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 2.0
+script = ExtResource("1_1vovs")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height"]
+layout_mode = 2
+text = "2"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Freq" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit_Freq" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq"]
+layout_mode = 2
+split_offset = 360
+dragger_visibility = 1
+
+[node name="Label_Freq" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq"]
+layout_mode = 2
+text = "Frequency"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.05
+max_value = 0.15
+step = 0.01
+value = 0.1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer"]
+layout_mode = 2
+text = "0.1"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Seed" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit_Seed" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed"]
+layout_mode = 2
+split_offset = 360
+dragger_visibility = 1
+
+[node name="Label_Seed" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed/HSplit_Seed"]
+layout_mode = 2
+text = "Seed"
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed/HSplit_Seed"]
+layout_mode = 2
+alignment = 1
+
+[node name="Margin_Update" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Update"]
+layout_mode = 2
+text = "Update"
+
+[node name="Margin_Randomize" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Randomize"]
+layout_mode = 2
+text = "Randomize"
+
+[node name="TODO_Margin_Default" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/TODO_Margin_Default"]
+layout_mode = 2
+text = "TODO DEFAULT"
+
+[node name="Food" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+visible = false
+layout_mode = 2
+
+[node name="Settings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+visible = false
+layout_mode = 2
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/HSlider" to="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer/HSlider" to="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer/Label" method="_on_h_slider_value_changed"]

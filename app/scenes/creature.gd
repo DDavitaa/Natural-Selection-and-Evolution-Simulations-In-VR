@@ -96,7 +96,7 @@ func _process(delta):
 	
 	label.rotate_object_local(Vector3.UP, PI)
 	
-	label.text = "SCALE: " + str(snappedf($CollisionShape3D.scale.y,0.01)) + "\nSPEED: " + str(SPEED) + "\nkilling: " + str(kill_creature) + "\nrunning_away: " + str(run_from_creature)
+	label.text = "SCALE: " + str(snappedf(scale.y,0.01)) + "\nSPEED: " + str(SPEED) + "\nkilling: " + str(kill_creature) + "\nrunning_away: " + str(run_from_creature)
 	
 func update_target_location(target_location):
 	get_node("NavigationAgent3D").set_target_position(target_location)
