@@ -3,10 +3,10 @@ extends StaticBody3D
 
 # export variables
 @export_group("Terrain")
-@export var size:int = 20
-@export var yHeight:float = 5
-@export var frequency:float = 0.1
-@export var seed:int = 0
+@export var t_size:int = 30
+@export var t_yHeight:float = 2
+@export var t_frequency:float = 0.1
+@export var t_seed:int = 0
 
 @export var update = false
 @export var vertices_visibility = false
@@ -24,8 +24,11 @@ var yHeight_set:float
 var freq_set:float
 var seed_set:int
 
+
 var creature_amount_set:int
 var creature_amount_check:int = 0
+var set_creature_id:int = 1
+
 var food_amount_set:int
 var food_amount_check:int = 0
 
@@ -39,7 +42,9 @@ var food_scene
 @onready var terrain_mesh = $"NavigationRegion3D/terrain_mesh"
 @onready var terrain_collision = $terrain_collision
 
+@onready var gui_menu = $"../../env/MAIN_GUI"
 
+@onready var protonScatter = $"../ProtonScatter"
 
 # for shaders
 var min_height:float = 0
@@ -48,7 +53,9 @@ var max_height:float = 1
 var rng = RandomNumberGenerator.new()
 var mdt = MeshDataTool.new()
 
-
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# SET CREATURES AND FOOD TO ZERO
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 func _ready():
 	refresh_terrain(false)
@@ -65,24 +72,24 @@ func refresh_terrain(randomize:bool):
 			i.free()
 		elif "food" in i.name:
 			i.free()
-		
-
-	generate_terrain(randomize)
-	generate_creatures()
-	generate_food()
 	
-func generate_creatures():
-	creature_amount_set = creature_amount
-	creature_amount_check = creature_amount_set
+	generate_terrain(randomize)
+	
+	protonScatter.enabled = false
+	protonScatter.enabled = true
+	
+func generate_creatures(c_amount=5,c_colour=0,c_health=10,c_energy=200,c_size=0.2,c_speed=1,c_mass=80,c_atk=4,c_def=4,c_los=10,c_diet=0):
+	
+	creature_amount_set = c_amount
 	
 	if creature_scene == null:
 		creature_scene = preload("res://scenes/creature.tscn")
 	
 	for i in creature_amount_set:
-		gen_one_creature(creature_scene)
+		gen_one_creature(creature_scene,c_colour,c_health,c_energy,c_size,c_speed,c_mass,c_atk,c_def,c_los,c_diet)
 	
 	
-func gen_one_creature(creature_scene):
+func gen_one_creature(creature_scene,c_colour=0,c_health=10,c_energy=200,c_size=0.2,c_speed=1,c_mass=80,c_atk=4,c_def=4,c_los=10,c_diet=0):
 	var creature_instance = creature_scene.instantiate()
 	
 	add_child(creature_instance)
@@ -91,35 +98,87 @@ func gen_one_creature(creature_scene):
 	randVert.y += 0.2
 	creature_instance.position = randVert
 	
-	var creature_scale = 0.2
-	creature_instance.scale = Vector3(creature_scale,creature_scale,creature_scale)
-	
 	var randRot:Vector3 = Vector3(0,randf_range(0,360),0)
 	creature_instance.rotation_degrees = randRot
+	
+	creature_instance.creature_id = set_creature_id
+	set_creature_id += 1
+	
+	creature_instance.gui_COLOUR = c_colour
+	creature_instance.gui_HEALTH = c_health
+	creature_instance.gui_ENERGY = c_energy
+	creature_instance.gui_SIZE = c_size
+	creature_instance.gui_SPEED = c_speed
+	creature_instance.gui_MASS = c_mass
+	creature_instance.gui_ATK = c_atk
+	creature_instance.gui_DEF = c_def
+	creature_instance.gui_LOS = c_los
+	creature_instance.gui_IS_CARNIVORE = c_diet
+	
 
-func generate_food():
-	food_amount_set = food_amount
+func gen_offspring(parent,o_health,o_energy,o_size,o_speed,o_mass,o_atk,o_def,o_los,o_diet):
+	var creature_instance = creature_scene.instantiate()
+	
+	add_child(creature_instance)
+	
+	creature_instance.creature_id = set_creature_id
+	set_creature_id += 1
+	
+	creature_instance.global_position = parent.global_position + Vector3(0,1,0)
+	creature_instance.gui_COLOUR = parent.gui_COLOUR
+	creature_instance.gui_HEALTH = o_health
+	creature_instance.gui_ENERGY = o_energy
+	creature_instance.gui_SIZE = o_size
+	creature_instance.gui_SPEED = o_speed
+	creature_instance.gui_MASS = o_mass
+	creature_instance.gui_ATK = o_atk
+	creature_instance.gui_DEF = o_def
+	creature_instance.gui_LOS = o_los
+	creature_instance.gui_IS_CARNIVORE = o_diet
+	
+	creature_instance.get_node("StateChart").send_event("wander")
+
+func reproduction(parent):
+	var parentlock = false
+	
+	if !parentlock:
+		var parents = []
+		
+		if parents.size() <= 1:
+			parents.append(parent)
+		if parents.size() == 2:
+			parentlock = true
+
+
+func generate_food(f_amount=10,f_hfactor:float=25.0,f_buffHealth=0.5,f_buffATK=0.2,f_buffDEF=0.1,f_buffLOS=0.5,f_poisonChance:float=20.0):
+	food_amount_set = f_amount
 	food_amount_check = food_amount_set
 	
 	if food_scene == null:
 		food_scene = preload("res://scenes/food.tscn")
 	
 	for i in food_amount_set:
-		gen_one_creature(food_scene)
+		gen_one_food(food_scene,f_hfactor,f_buffHealth,f_buffATK,f_buffDEF,f_buffLOS,f_poisonChance)
 	
 
-func gen_one_food(food_scene):
+func gen_one_food(food_scene,f_hfactor:float=25.0,f_buffHealth=0.5,f_buffATK=0.2,f_buffDEF=0.1,f_buffLOS=0.5,f_poisonChance:float=20.0):
 	var food_instance = food_scene.instantiate()
 	
 	add_child(food_instance)
 	
 	var randVert:Vector3 = mdt.get_vertex(randi_range(0,vertCount))
 	
-	randVert.y += 0.1
+	randVert.y += 0.2
 	food_instance.position = randVert
 	
-	var food_scale = 0.1
-	food_instance.scale = Vector3(food_scale,food_scale,food_scale)
+	food_instance.health_factor = f_hfactor/100.0
+	food_instance.buff_HEALTH = f_buffHealth
+	food_instance.buff_ATK = f_buffATK
+	food_instance.buff_DEF = f_buffDEF
+	food_instance.buff_LOS = f_buffLOS
+	food_instance.poisonousChance = f_poisonChance/100.0
+	
+	food_instance.rng_check = true
 
 
 func generate_terrain(randomize:bool):
@@ -130,10 +189,10 @@ func generate_terrain(randomize:bool):
 		freq_set = snappedf(rng.randf_range(0.05,0.15),0.01)
 		seed_set = rng.randi_range(0,100)
 	else:
-		size_set = size
-		yHeight_set = yHeight
-		freq_set = frequency
-		seed_set = seed
+		size_set = t_size
+		yHeight_set = t_yHeight
+		freq_set = t_frequency
+		seed_set = t_seed
 		
 	
 	# initializing variables
@@ -188,7 +247,6 @@ func generate_terrain(randomize:bool):
 	# mesh data tool for number of vertices
 	mdt.create_from_surface(a_mesh,0)
 	vertCount = mdt.get_vertex_count()
-	print(vertCount)
 	
 	for z in range(size_set+1):
 		var y:float = -5
@@ -396,11 +454,7 @@ func _process(delta):
 		refresh_terrain(true)
 		generate_random = false
 		random_generated = true
-		
-	if !random_generated:
-		if size != size_set || yHeight != yHeight_set || frequency != freq_set || seed != seed_set:
-			refresh_terrain(false)
-		
+	
 	if vertices_visibility == false:
 		var j = 1
 		for i in get_children():
@@ -413,7 +467,9 @@ func _process(delta):
 				i.visible = true
 	
 	position.y = yHeight_set - yHeight_set/2
-			
+	
+	gui_menu.position.x = t_size/1.7
+	
 	if food_amount_check < food_amount_set:
 		gen_one_food(food_scene)
 		food_amount_check += 1

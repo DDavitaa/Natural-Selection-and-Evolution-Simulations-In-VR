@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg41th7p1wxb2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wr5i"]
+bg_color = Color(0.270588, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odp24"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_bottom = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hwhm"]
+bg_color = Color(0.054902, 0.2, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ws5n"]
+bg_color = Color(0.054902, 0.780392, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_bottom = 5
+
+[node name="Bars" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 582.0
+offset_bottom = 64.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2wr5i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_odp24")
+value = 78.21
+show_percentage = false
+
+[node name="EnergyBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 101.0
+offset_right = 582.0
+offset_bottom = 165.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2hwhm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8ws5n")
+value = 79.42
+show_percentage = false

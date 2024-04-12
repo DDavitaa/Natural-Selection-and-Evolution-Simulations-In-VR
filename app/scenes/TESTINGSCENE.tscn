@@ -1,0 +1,272 @@
+[gd_scene load_steps=33 format=3 uid="uid://c5naqbv0sfts7"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_1nfkm"]
+[ext_resource type="Shader" path="res://scenes/ground.gdshader" id="1_edyog"]
+[ext_resource type="Script" path="res://root.gd" id="1_u1yx3"]
+[ext_resource type="Texture2D" uid="uid://bfshry2vj0wmh" path="res://hdri/evening_road_01_puresky_4k.hdr" id="2_thsjb"]
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="4_ucf25"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="5_115wh"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="6_rhxgv"]
+[ext_resource type="PackedScene" uid="uid://kyhaogt0a4q8" path="res://addons/godot-xr-tools/functions/movement_flight.tscn" id="7_nkuj5"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="8_d4ato"]
+[ext_resource type="Script" path="res://scenes/controls.gd" id="9_w6ckn"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="10_vh2ua"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="11_vuyy4"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="12_6ahpc"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="14_wsdpn"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_fllr1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s0wk3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x56vr"]
+albedo_color = Color(0.294118, 0.32549, 0.282353, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ydvt4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_52plu"]
+render_priority = 0
+shader = ExtResource("1_edyog")
+shader_parameter/gridlineOnEvery = 1.0
+shader_parameter/lineThickness = 0.01
+shader_parameter/originOffset = Vector2(0, 0)
+shader_parameter/color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c5gf5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4r05c"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kbiwx"]
+panorama = ExtResource("2_thsjb")
+
+[sub_resource type="Sky" id="Sky_2mgdq"]
+sky_material = SubResource("PanoramaSkyMaterial_kbiwx")
+
+[sub_resource type="Environment" id="Environment_kjwog"]
+background_mode = 2
+background_energy_multiplier = 0.78
+sky = SubResource("Sky_2mgdq")
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xo6gm"]
+albedo_color = Color(0, 0.807843, 0.929412, 1)
+emission_enabled = true
+emission = Color(0.145098, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_5cqfp"]
+script/source = "extends Node3D
+
+@onready var slider = $sliderbody
+@onready var label = $label
+@onready var sliderspace = $sliderspace
+
+@export var max = 80
+@export var min = 30
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_function_pointer_pointing_event(event):
+	print(\"hello\")
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tws3g"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wdfft"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpn5d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnxus"]
+albedo_color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[sub_resource type="GDScript" id="GDScript_3uldj"]
+script/source = "extends Node3D
+
+@onready var number = $Label3D
+@onready var label = $Label3D2
+@onready var leftArrow = $MeshInstance3D
+@onready var rightArrow = $MeshInstance3D2
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_2v61f"]
+
+[node name="testing" type="Node3D"]
+script = ExtResource("1_u1yx3")
+
+[node name="ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_fllr1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground/CollisionShape3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_s0wk3")
+surface_material_override/0 = SubResource("StandardMaterial3D_x56vr")
+
+[node name="grid - MeshInstance3D" type="MeshInstance3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0.001, 0)
+mesh = SubResource("PlaneMesh_ydvt4")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_52plu")
+
+[node name="FreeLookCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0616, 6.37763)
+script = ExtResource("1_1nfkm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.741168, 0.67132, 0, -0.67132, 0.741168, 0, 8.46512, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.743635, 0, -0.668586, 0, 1, 0, 0.668586, 0, 0.743635, 0, 0.5, -10.2154)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_c5gf5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_4r05c")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.991335, 0, 0.131357, 0, 1, 0, -0.131357, 0, 0.991335, -10.7009, 0.5, -1.45989)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_c5gf5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_4r05c")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(0.922363, 0, 0.386325, 0, 1, 0, -0.386325, 0, 0.922363, 7.0791, 0.5, 2.75262)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_c5gf5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3/CollisionShape3D"]
+mesh = SubResource("BoxMesh_4r05c")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kjwog")
+
+[node name="player - origin" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.97255, 2.23643, 12.1615)
+world_scale = 0.2
+current = true
+metadata/_edit_group_ = true
+
+[node name="player - camera" type="XRCamera3D" parent="player - origin"]
+
+[node name="VRCommonShaderCache" parent="player - origin/player - camera" instance=ExtResource("4_ucf25")]
+
+[node name="PlayerBody" parent="player - origin" instance=ExtResource("5_115wh")]
+collision_mask = 2047
+push_rigid_bodies = false
+
+[node name="player - audioListener" type="AudioListener3D" parent="player - origin"]
+current = true
+
+[node name="left_controller" type="XRController3D" parent="player - origin"]
+tracker = &"left_hand"
+
+[node name="MovementDirect" parent="player - origin/left_controller" instance=ExtResource("6_rhxgv")]
+strafe = true
+
+[node name="MovementFlight" parent="player - origin/left_controller" instance=ExtResource("7_nkuj5")]
+flight_button = "ax_button"
+bearing = 0
+speed_scale = 3.0
+acceleration_scale = 3.0
+guidance = 0.5
+
+[node name="LeftHand - model" parent="player - origin/left_controller" instance=ExtResource("8_d4ato")]
+
+[node name="Node3D" type="Node3D" parent="player - origin/left_controller"]
+script = ExtResource("9_w6ckn")
+
+[node name="right_controller" type="XRController3D" parent="player - origin"]
+tracker = &"right_hand"
+
+[node name="MovementTurn" parent="player - origin/right_controller" instance=ExtResource("10_vh2ua")]
+turn_mode = 2
+
+[node name="MovementJump" parent="player - origin/right_controller" instance=ExtResource("11_vuyy4")]
+jump_button_action = "ax_button"
+
+[node name="RightHand - model" parent="player - origin/right_controller" instance=ExtResource("12_6ahpc")]
+
+[node name="Node3D" type="Node3D" parent="player - origin/right_controller"]
+script = ExtResource("9_w6ckn")
+
+[node name="FunctionPointer" parent="player - origin/right_controller" instance=ExtResource("14_wsdpn")]
+laser_length = 1
+laser_material = SubResource("StandardMaterial3D_xo6gm")
+collision_mask = 5242881
+
+[node name="GUI TEST" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01452, 0)
+
+[node name="slider 1" type="Node3D" parent="GUI TEST"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.36221, 0, 0)
+script = SubResource("GDScript_5cqfp")
+
+[node name="SliderJoint3D" type="SliderJoint3D" parent="GUI TEST/slider 1"]
+node_b = NodePath("../sliderbody")
+
+[node name="sliderbody" type="StaticBody3D" parent="GUI TEST/slider 1"]
+
+[node name="slider_collision" type="CollisionShape3D" parent="GUI TEST/slider 1/sliderbody"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_tws3g")
+
+[node name="slider_mesh" type="MeshInstance3D" parent="GUI TEST/slider 1/sliderbody/slider_collision"]
+mesh = SubResource("BoxMesh_wdfft")
+
+[node name="label" type="Label3D" parent="GUI TEST/slider 1/sliderbody"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.253537, 0)
+text = "test"
+
+[node name="sliderspace" type="MeshInstance3D" parent="GUI TEST/slider 1"]
+transform = Transform3D(2, 0, 0, 0, -0.03, -2.62268e-09, 0, 2.62268e-09, -0.03, 0, 0, 0)
+mesh = SubResource("BoxMesh_qpn5d")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lnxus")
+
+[node name="num input 1" type="Node3D" parent="GUI TEST"]
+script = SubResource("GDScript_3uldj")
+
+[node name="Label3D" type="Label3D" parent="GUI TEST/num input 1"]
+text = "10"
+
+[node name="Label3D2" type="Label3D" parent="GUI TEST/num input 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04313, 0, 0)
+text = "Creature Amount"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GUI TEST/num input 1"]
+transform = Transform3D(0.1, 0, 0, 0, 0.3, 0, 0, 0, 0.1, -0.2, 0, 0)
+mesh = SubResource("BoxMesh_2v61f")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="GUI TEST/num input 1"]
+transform = Transform3D(0.1, 0, 0, 0, 0.3, 0, 0, 0, 0.1, 0.2, 0, 0)
+mesh = SubResource("BoxMesh_2v61f")
+
+[connection signal="button_pressed" from="player - origin/left_controller" to="player - origin/left_controller/Node3D" method="_on_left_controller_button_pressed"]
+[connection signal="button_released" from="player - origin/left_controller" to="player - origin/left_controller/Node3D" method="_on_left_controller_button_released"]
+[connection signal="button_pressed" from="player - origin/right_controller" to="player - origin/right_controller/Node3D" method="_on_right_controller_button_pressed"]
+[connection signal="button_released" from="player - origin/right_controller" to="player - origin/right_controller/Node3D" method="_on_right_controller_button_released"]

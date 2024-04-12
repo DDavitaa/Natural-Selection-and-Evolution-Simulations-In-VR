@@ -14,8 +14,8 @@ void vertex(){
 }
 
 void fragment() {
-	float thick = lineThickness / gridlineOnEvery;
-	vec2 df = fract(pointWorld / gridlineOnEvery*10.0 + thick / 2.0);
+	float thick = lineThickness*1.9 / gridlineOnEvery;
+	vec2 df = fract(pointWorld / gridlineOnEvery*1.0 + thick / 2.0);
 	float grid = step(thick, df.x) * step(thick, df.y);
 	ALBEDO = color.rgb;
 	ALPHA = (1.0 - grid);

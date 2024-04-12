@@ -7,7 +7,6 @@ var is_using_xr:bool
 var xr_interface: XRInterface
 
 func _ready():
-	
 	xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR initialised successfully")

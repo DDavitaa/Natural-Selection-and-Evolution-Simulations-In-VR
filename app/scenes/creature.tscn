@@ -1,6 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh4trkg5bus2j"]
+[gd_scene load_steps=22 format=3 uid="uid://bh4trkg5bus2j"]
 
 [ext_resource type="Script" path="res://scenes/creature.gd" id="1_g1v3g"]
+[ext_resource type="PackedScene" uid="uid://bm6xpgtop6xw7" path="res://scenes/cone.tscn" id="2_3qkii"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_dootn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_x8634"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_absby"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_out40"]
+[ext_resource type="PackedScene" uid="uid://cg41th7p1wxb2" path="res://scenes/healthbar.tscn" id="7_rt2oj"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="8_effpl"]
+[ext_resource type="PackedScene" uid="uid://3osnkntqyaq6" path="res://scenes/creatureGui.tscn" id="9_ka1di"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/pickable.gd" id="10_as3ey"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="11_w3oru"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ovaa2"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l0wa4"]
 
@@ -11,15 +24,42 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n4n8"]
 albedo_color = Color(0, 0.768627, 0.894118, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_koe63"]
-radius = 11.7565
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i785h"]
-height = 2.15301
-radius = 2.02109
+height = 7.153
+radius = 2.3
 
-[node name="creature" type="CharacterBody3D" groups=["creatures"]]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_e5rsd"]
+points = PackedVector3Array(-2.38419e-07, 1.49971, -2, -2.38419e-07, -0.000293493, 0, 0.584965, 1.47093, -2, -0.585552, 1.47093, -2, -1.1482, 1.38577, -2, -1.6668, 1.24716, -2, -2.12138, 1.0604, -2, -2.49491, 0.833105, -2, -2.77212, 0.573806, -2, -2.94244, 0.292483, -2, -3, -0.000293493, -2, -2.94244, -0.292776, -2, -2.77212, -0.574099, -2, -2.49491, -0.833399, -2, -2.12138, -1.06069, -2, -1.6668, -1.24745, -2, -1.1482, -1.38606, -2, -0.585552, -1.47122, -2, -2.38419e-07, -1.5, -2, 0.584965, -1.47122, -2, 1.14761, -1.38606, -2, 1.66621, -1.24745, -2, 2.12079, -1.06069, -2, 2.49432, -0.833399, -2, 2.77153, -0.574099, -2, 2.94186, -0.292776, -2, 3, -0.000293493, -2, 2.94186, 0.292483, -2, 2.77153, 0.573806, -2, 2.49432, 0.833105, -2, 2.12079, 1.0604, -2, 1.66621, 1.24716, -2, 1.14761, 1.38577, -2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3f66g"]
+flip_faces = true
+radius = 0.6
+height = 2.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqr8q"]
+shading_mode = 0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4on1u"]
+radius = 1.48236
+height = 6.68006
+
+[node name="creature" type="CharacterBody3D" groups=["creature"]]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 script = ExtResource("1_g1v3g")
+
+[node name="spriteIcon" type="Sprite3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0, 2.72615, 0)
+
+[node name="sprite_healthbar" type="Sprite3D" parent="."]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0, 0.99598, 0)
+texture = SubResource("ViewportTexture_ovaa2")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(588, 512)
+
+[node name="Bars" parent="SubViewport" instance=ExtResource("7_rt2oj")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_l0wa4")
@@ -40,18 +80,176 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7n4n8")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.5
 
-[node name="Area3D" type="Area3D" parent="." groups=["creature_area"]]
+[node name="reach_area" type="Area3D" parent="." groups=["creature_touch"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_koe63")
-
-[node name="Area3D2" type="Area3D" parent="." groups=["creature_touch"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="reach_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61, 0)
 shape = SubResource("CylinderShape3D_i785h")
 
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
-[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
+[node name="lineOfSight_area" type="Area3D" parent="."]
+
+[node name="Cone" parent="lineOfSight_area" instance=ExtResource("2_3qkii")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.464146, -0.531084)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lineOfSight_area"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.464146, -0.531084)
+shape = SubResource("ConvexPolygonShape3D_e5rsd")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_dootn")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("3_x8634")
+initial_state = NodePath("Still")
+
+[node name="Still" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="To_Wander" type="Node" parent="StateChart/Root/Still"]
+script = ExtResource("6_out40")
+to = NodePath("../../Wander")
+event = &"still_to_wander"
+
+[node name="Wander" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="To_LookForFood" type="Node" parent="StateChart/Root/Wander"]
+script = ExtResource("6_out40")
+to = NodePath("../../LookForFood")
+event = &"lookforfood"
+
+[node name="To_Fight" type="Node" parent="StateChart/Root/Wander"]
+script = ExtResource("6_out40")
+to = NodePath("../../Fight")
+event = &"fight"
+
+[node name="To_Flee" type="Node" parent="StateChart/Root/Wander"]
+script = ExtResource("6_out40")
+to = NodePath("../../Flee")
+event = &"flee"
+
+[node name="To_Dead" type="Node" parent="StateChart/Root/Wander"]
+script = ExtResource("6_out40")
+to = NodePath("../../Dead")
+event = &"dead"
+
+[node name="To_FindMate" type="Node" parent="StateChart/Root/Wander"]
+script = ExtResource("6_out40")
+to = NodePath("../../FindMate")
+event = &"findmate"
+
+[node name="LookForFood" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="To_Wander" type="Node" parent="StateChart/Root/LookForFood"]
+script = ExtResource("6_out40")
+to = NodePath("../../Wander")
+event = &"lookforfood_wander"
+
+[node name="To_Fight" type="Node" parent="StateChart/Root/LookForFood"]
+script = ExtResource("6_out40")
+to = NodePath("../../Fight")
+event = &"fight"
+
+[node name="To_Flee" type="Node" parent="StateChart/Root/LookForFood"]
+script = ExtResource("6_out40")
+to = NodePath("../../Flee")
+event = &"flee"
+
+[node name="To_Dead" type="Node" parent="StateChart/Root/LookForFood"]
+script = ExtResource("6_out40")
+to = NodePath("../../Dead")
+event = &"dead"
+
+[node name="Fight" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="To_Wander" type="Node" parent="StateChart/Root/Fight"]
+script = ExtResource("6_out40")
+to = NodePath("../../Wander")
+event = &"wander"
+
+[node name="To_Dead" type="Node" parent="StateChart/Root/Fight"]
+script = ExtResource("6_out40")
+to = NodePath("../../Dead")
+event = &"dead"
+
+[node name="Flee" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="To_Wander" type="Node" parent="StateChart/Root/Flee"]
+script = ExtResource("6_out40")
+to = NodePath("../../Wander")
+event = &"wander"
+
+[node name="To_Dead" type="Node" parent="StateChart/Root/Flee"]
+script = ExtResource("6_out40")
+to = NodePath("../../Dead")
+event = &"dead"
+
+[node name="FindMate" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="To_Wander" type="Node" parent="StateChart/Root/FindMate"]
+script = ExtResource("6_out40")
+to = NodePath("../../Wander")
+event = &"wander"
+
+[node name="To_LookForFood" type="Node" parent="StateChart/Root/FindMate"]
+script = ExtResource("6_out40")
+to = NodePath("../../LookForFood")
+event = &"lookforfood"
+
+[node name="To_Fight" type="Node" parent="StateChart/Root/FindMate"]
+script = ExtResource("6_out40")
+to = NodePath("../../Fight")
+event = &"fight"
+
+[node name="To_Flee" type="Node" parent="StateChart/Root/FindMate"]
+script = ExtResource("6_out40")
+to = NodePath("../../Flee")
+event = &"flee"
+
+[node name="Dead" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_absby")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("8_effpl")]
+process_mode = 3
+transform = Transform3D(-3.63, 0, -3.17345e-07, 0, 3.63, 0, 3.17345e-07, 0, -3.63, 0, 10.5083, 0)
+screen_size = Vector2(2, 2)
+scene = ExtResource("9_ka1di")
+viewport_size = Vector2(835.295, 804.14)
+unshaded = true
+
+[node name="XRToolsPickable" type="RigidBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("10_as3ey")
+ranged_grab_method = 0
+
+[node name="XRToolsHighlightVisible" type="Node3D" parent="XRToolsPickable"]
+script = ExtResource("11_w3oru")
+
+[node name="highlightMesh" type="MeshInstance3D" parent="XRToolsPickable/XRToolsHighlightVisible"]
+mesh = SubResource("CapsuleMesh_3f66g")
+surface_material_override/0 = SubResource("StandardMaterial3D_eqr8q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XRToolsPickable"]
+shape = SubResource("CapsuleShape3D_4on1u")
+
+[connection signal="body_entered" from="reach_area" to="." method="_on_reach_area_body_entered"]
+[connection signal="body_exited" from="reach_area" to="." method="_on_reach_area_body_exited"]
+[connection signal="area_entered" from="lineOfSight_area" to="." method="_on_line_of_sight_area_area_entered"]
+[connection signal="area_exited" from="lineOfSight_area" to="." method="_on_line_of_sight_area_area_exited"]
+[connection signal="body_entered" from="lineOfSight_area" to="." method="_on_line_of_sight_area_body_entered"]
+[connection signal="body_exited" from="lineOfSight_area" to="." method="_on_line_of_sight_area_body_exited"]
+[connection signal="state_processing" from="StateChart/Root/Still" to="." method="_on_still_state_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Wander" to="." method="_on_wander_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/LookForFood" to="." method="_on_look_for_food_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Fight" to="." method="_on_fight_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Flee" to="." method="_on_flee_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/FindMate" to="." method="_on_find_mate_state_physics_processing"]
+[connection signal="state_processing" from="StateChart/Root/Dead" to="." method="_on_dead_state_processing"]

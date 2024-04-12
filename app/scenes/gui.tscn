@@ -1,257 +1,1276 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm616if5mhby4"]
+[gd_scene load_steps=37 format=3 uid="uid://dm616if5mhby4"]
 
-[ext_resource type="Script" path="res://scenes/slider.gd" id="1_1vovs"]
+[ext_resource type="Script" path="res://scenes/gui.gd" id="1_030ci"]
 [ext_resource type="Script" path="res://scenes/sliderLabel.gd" id="2_d83j5"]
+[ext_resource type="Texture2D" uid="uid://blk8i183c2a7p" path="res://textures/controls.jpg" id="3_7wiq8"]
 
 [sub_resource type="Theme" id="Theme_fmwm8"]
 default_font_size = 25
 
+[sub_resource type="FontVariation" id="FontVariation_7mksg"]
+variation_embolden = 0.44
+
 [sub_resource type="LabelSettings" id="LabelSettings_nqg62"]
+font = SubResource("FontVariation_7mksg")
 font_size = 60
+font_color = Color(0.105882, 0.105882, 0.105882, 1)
+outline_size = 5
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ps7u7"]
-color = Color(0.5103, 0.616035, 0.63, 1)
+color = Color(1, 1, 1, 1)
 thickness = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcwgu"]
-bg_color = Color(0.180392, 0.333333, 0.419608, 1)
-shadow_size = 10
+[sub_resource type="GDScript" id="GDScript_drcle"]
+script/source = "extends HSlider
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_value_changed(value):
+	print(value)
+	pass # Replace with function body.
+"
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_otq23"]
+color = Color(0.678431, 0.686275, 0.67451, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlwkj"]
+bg_color = Color(0, 0.219608, 0.239216, 0.623529)
+border_color = Color(0.792157, 0.792157, 0.792157, 0.545098)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgm8k"]
+bg_color = Color(0, 0.384314, 0.172549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iew15"]
+bg_color = Color(0.505882, 0, 0.0156863, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lu8dk"]
+bg_color = Color(0.03, 0.31, 0.6, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7w7q4"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dwvdp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1mej"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bkx8t"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1vqls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k01x5"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1ad3"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2qut"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwe08"]
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pkmy"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bq3ad"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x8hh6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rudtg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7xlvx"]
+bg_color = Color(0.188235, 0.27451, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0is1"]
+bg_color = Color(0.133333, 0.168627, 0.188235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2fx3"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f43ql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8qij"]
+bg_color = Color(0.133333, 0.168627, 0.188235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppeok"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xfj6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvpa4"]
+bg_color = Color(0.133333, 0.168627, 0.188235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcbwp"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_met80"]
 
 [node name="GUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 theme = SubResource("Theme_fmwm8")
+script = ExtResource("1_030ci")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 793.0
-offset_bottom = 809.0
-color = Color(0.243137, 0.329412, 0.341176, 1)
+offset_right = 830.0
+offset_bottom = 1038.0
+color = Color(0.352941, 0.756863, 1, 0.529412)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 789.0
-offset_bottom = 181.0
+offset_right = 830.0
+offset_bottom = 1040.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Edit Parameters"
 label_settings = SubResource("LabelSettings_nqg62")
+horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 21
 theme_override_styles/separator = SubResource("StyleBoxLine_ps7u7")
 
-[node name="TAB_CONTAINER" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TAB_CONTAINER" type="TabContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 31
 
-[node name="Creatures" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+[node name="Environment" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER"]
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 0
 
-[node name="Margin_Amount" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures"]
+[node name="Margin_Size" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="HSplit_Amount" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Margin_Amount"]
+[node name="HSplit_Size" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size"]
 layout_mode = 2
 split_offset = 360
 dragger_visibility = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Margin_Amount/HSplit_Amount"]
+[node name="Label_Size" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size"]
 layout_mode = 2
-text = "Creature Amount"
+text = "Size of Terrain"
 
-[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Margin_Amount/HSplit_Amount"]
-layout_mode = 2
-value = 10.0
-alignment = 1
-
-[node name="Environment" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
-layout_mode = 2
-
-[node name="Panel_TG" type="PanelContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_rcwgu")
-
-[node name="Margin_TG" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Panel_TG"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Title_TG" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Panel_TG/Margin_TG"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 31
-text = "Terrain Generation"
-horizontal_alignment = 1
-
-[node name="Margin_Size" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="HSplit_Size" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size"]
-layout_mode = 2
-split_offset = 360
-dragger_visibility = 1
-
-[node name="Label_Size" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size"]
-layout_mode = 2
-text = "Size of Environment"
-
-[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size"]
-layout_mode = 2
-min_value = 10.0
-max_value = 80.0
-value = 30.0
-alignment = 1
-suffix = "units"
-
-[node name="Margin_Height" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
-
-[node name="HSplit_Height" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height"]
-layout_mode = 2
-split_offset = 360
-
-[node name="Label_Height" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height"]
-layout_mode = 2
-text = "Height of Environment"
-
-[node name="HSplit_Height" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height"]
+[node name="HSplit_Height" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size"]
 layout_mode = 2
 split_offset = 295
 dragger_visibility = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size/HSplit_Height"]
 layout_mode = 2
 size_flags_vertical = 4
-min_value = 0.1
-max_value = 5.0
-step = 0.1
-value = 2.0
-script = ExtResource("1_1vovs")
+min_value = 20.0
+max_value = 60.0
+step = 5.0
+value = 30.0
+script = SubResource("GDScript_drcle")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size/HSplit_Height"]
+layout_mode = 2
+text = "30"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Height" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit_Height" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height"]
+layout_mode = 2
+split_offset = 360
+
+[node name="Label_Height" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height"]
+layout_mode = 2
+text = "Height of Terrain"
+
+[node name="HSplit_Height" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 5.0
+step = 0.25
+value = 2.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height"]
 layout_mode = 2
 text = "2"
 script = ExtResource("2_d83j5")
 
-[node name="Margin_Freq" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+[node name="Margin_Freq" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="HSplit_Freq" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq"]
+[node name="HSplit_Freq" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq"]
 layout_mode = 2
 split_offset = 360
 dragger_visibility = 1
 
-[node name="Label_Freq" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq"]
+[node name="Label_Freq" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq"]
 layout_mode = 2
 text = "Frequency"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq"]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq"]
 layout_mode = 2
 split_offset = 295
 dragger_visibility = 1
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer"]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 min_value = 0.05
 max_value = 0.15
 step = 0.01
-value = 0.1
+value = 0.08
+scrollable = false
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer"]
 layout_mode = 2
-text = "0.1"
+text = "0.08"
 script = ExtResource("2_d83j5")
 
-[node name="Margin_Seed" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+[node name="Margin_Seed" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="HSplit_Seed" type="HSplitContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed"]
+[node name="HSplit_Seed" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed"]
 layout_mode = 2
 split_offset = 360
 dragger_visibility = 1
 
-[node name="Label_Seed" type="Label" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed/HSplit_Seed"]
+[node name="Label_Seed" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed/HSplit_Seed"]
 layout_mode = 2
 text = "Seed"
 
-[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed/HSplit_Seed"]
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Seed/HSplit_Seed"]
 layout_mode = 2
 alignment = 1
 
-[node name="Margin_Update" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+[node name="Margin_Update" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Update"]
+[node name="update" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Update"]
 layout_mode = 2
-text = "Update"
+text = "Update Terrain"
 
-[node name="Margin_Randomize" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
-layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Randomize"]
-layout_mode = 2
-text = "Randomize"
-
-[node name="TODO_Margin_Default" type="MarginContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+[node name="Margin_Default" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/TODO_Margin_Default"]
+[node name="default" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Default"]
 layout_mode = 2
-text = "TODO DEFAULT"
+text = "Default Values"
 
-[node name="Food" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+[node name="Margin_note" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_note"]
+layout_mode = 2
+text = "Note: ALWAYS DETERMINE ENVIRONMENT FIRST"
+
+[node name="Creatures" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER"]
 visible = false
 layout_mode = 2
 
-[node name="Settings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TAB_CONTAINER"]
+[node name="Vbox_Creatures" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Margin_Colour" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Colour"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Colour/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "Indicates the type of species."
+mouse_filter = 1
+text = "Colour:"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Colour/HSplitContainer"]
+layout_mode = 2
+alignment = 1
+item_count = 5
+selected = 0
+popup/item_0/text = "Brown"
+popup/item_0/id = 0
+popup/item_1/text = "Red"
+popup/item_1/id = 1
+popup/item_2/text = "Yellow"
+popup/item_2/id = 2
+popup/item_3/text = "Green"
+popup/item_3/id = 3
+popup/item_4/text = "Blue"
+popup/item_4/id = 4
+
+[node name="Margin_Health" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How much damage the creature can take."
+mouse_filter = 1
+text = "Health:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 5.0
+max_value = 20.0
+value = 10.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "10"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Energy" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How much activity the creature can carry out. Can be replenished by consuming food."
+mouse_filter = 1
+text = "Energy:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 100.0
+max_value = 500.0
+step = 10.0
+value = 200.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "200"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Size" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How large the creature is."
+mouse_filter = 1
+text = "Size:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.05
+max_value = 0.6
+step = 0.05
+value = 0.2
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "0.2"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Speed" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How fast the creature is."
+mouse_filter = 1
+text = "Speed:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 2.0
+step = 0.25
+value = 1.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "1"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Mass" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How heavy the creature is."
+mouse_filter = 1
+text = "Mass:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 20.0
+max_value = 150.0
+step = 5.0
+value = 80.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "80"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Attack" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How much outgoing damage is dealt to another creature."
+mouse_filter = 1
+text = "Attack Power:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 10.0
+value = 4.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "4"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Defence" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How much incoming damage can be mitigated."
+mouse_filter = 1
+text = "Defence Power:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence/HSplitContainer"]
+layout_mode = 2
+split_offset = 295
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 10.0
+value = 4.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "4"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_LOSDist" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist"]
+layout_mode = 2
+split_offset = 195
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "How far the creature sees."
+mouse_filter = 1
+text = "Line of Sight Distance:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist/HSplitContainer"]
+layout_mode = 2
+split_offset = -55
+dragger_visibility = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 7.0
+max_value = 15.0
+step = 0.5
+value = 10.0
+script = SubResource("GDScript_drcle")
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+text = "10
+"
+script = ExtResource("2_d83j5")
+
+[node name="Margin_Diet" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Diet"]
+layout_mode = 2
+split_offset = 195
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Diet/HSplitContainer"]
+layout_mode = 2
+tooltip_text = "The type of food the creature consumes."
+mouse_filter = 1
+text = "Diet Type:"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Diet/HSplitContainer"]
+layout_mode = 2
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Herbivore"
+popup/item_0/id = 0
+popup/item_1/text = "Carnivore"
+popup/item_1/id = 1
+
+[node name="SPLIT" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/SPLIT"]
+layout_mode = 2
+theme_override_constants/separation = 21
+theme_override_styles/separator = SubResource("StyleBoxLine_otq23")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wlwkj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Margin_AddCreatures" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures"]
+layout_mode = 2
+split_offset = 155
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer"]
+layout_mode = 2
+text = "Add Creatures:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer"]
+layout_mode = 2
+split_offset = 200
+dragger_visibility = 1
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+split_offset = 155
+dragger_visibility = 1
+
+[node name="addbtn" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_wgm8k")
+text = "Add"
+
+[node name="clearbtn" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_iew15")
+text = "Clear All"
+
+[node name="Margin_Presets" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="pre1" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_lu8dk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7w7q4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dwvdp")
+text = "Preset 1"
+
+[node name="pre2" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_q1mej")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bkx8t")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1vqls")
+text = "Preset 2"
+
+[node name="pre3" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_k01x5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a1ad3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w2qut")
+text = "Preset 3"
+
+[node name="pre4" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vwe08")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4pkmy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bq3ad")
+text = "Preset 4"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="savetbtn" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x8hh6")
+text = "Save Preset"
+
+[node name="defaultbtn" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rudtg")
+text = "Default"
+
+[node name="Food" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER"]
 visible = false
 layout_mode = 2
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/HSlider" to="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/Label" method="_on_h_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer/HSlider" to="MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[node name="Margin_HFactor" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_HFactor"]
+layout_mode = 2
+split_offset = 440
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_HFactor/HSplit"]
+layout_mode = 2
+text = "Health Replenishment Factor:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_HFactor/HSplit"]
+layout_mode = 2
+min_value = 5.0
+step = 5.0
+value = 25.0
+alignment = 1
+prefix = "+"
+suffix = "%"
+
+[node name="Margin_BuffHealth" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffHealth"]
+layout_mode = 2
+split_offset = 440
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffHealth/HSplit"]
+layout_mode = 2
+text = "Max Health Buff/Debuff Amount:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffHealth/HSplit"]
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 0.5
+alignment = 1
+prefix = "+/-"
+
+[node name="Margin_BuffAtk" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffAtk"]
+layout_mode = 2
+split_offset = 440
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffAtk/HSplit"]
+layout_mode = 2
+text = "Attack Buff/Debuff Amount:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffAtk/HSplit"]
+layout_mode = 2
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.2
+alignment = 1
+prefix = "+/-"
+
+[node name="Margin_BuffDef" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffDef"]
+layout_mode = 2
+split_offset = 440
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffDef/HSplit"]
+layout_mode = 2
+text = "Defence Buff/Debuff Amount:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffDef/HSplit"]
+layout_mode = 2
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.1
+alignment = 1
+prefix = "+/-"
+
+[node name="Margin_BuffLos" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffLos"]
+layout_mode = 2
+split_offset = 440
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffLos/HSplit"]
+layout_mode = 2
+text = "Line Of Sight Distance Buff/Debuff Amount:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffLos/HSplit"]
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 0.5
+alignment = 1
+prefix = "+/-"
+
+[node name="Margin_BuffPoison" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffPoison"]
+layout_mode = 2
+split_offset = 440
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffPoison/HSplit"]
+layout_mode = 2
+text = "Poisonous Chance:"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/Margin_BuffPoison/HSplit"]
+layout_mode = 2
+min_value = 5.0
+step = 5.0
+value = 20.0
+alignment = 1
+suffix = "%"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wlwkj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer"]
+layout_mode = 2
+
+[node name="Margin_AddFood" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer"]
+layout_mode = 2
+text = "Add Food:"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer"]
+layout_mode = 2
+split_offset = -370
+dragger_visibility = 1
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 30.0
+value = 10.0
+alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+split_offset = 5
+dragger_visibility = 1
+
+[node name="addbtnfood" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_wgm8k")
+text = "Add"
+
+[node name="clearbtnfood" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_iew15")
+text = "Clear All"
+
+[node name="Margin_Default" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="defaultbtnfood" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_Default"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rudtg")
+text = "Default"
+
+[node name="Settings" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin"]
+layout_mode = 2
+split_offset = 360
+dragger_visibility = 1
+
+[node name="Label_musicV" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin/HSplit"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin/HSplit"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -80.0
+max_value = -15.0
+step = 5.0
+value = -20.0
+script = SubResource("GDScript_drcle")
+
+[node name="Margin3" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="playsim" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin3"]
+layout_mode = 2
+text = "START SIMULATION"
+
+[node name="Margin4" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="resetsim" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin4"]
+layout_mode = 2
+text = "RESET SIMULATION"
+
+[node name="Margin5" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="exit" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin5"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="Margin6" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin6"]
+layout_mode = 2
+text = "Note: you cannot start the simulation with the play button
+below."
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7xlvx")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 20
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+split_offset = 120
+dragger_visibility = 1
+
+[node name="pause" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_i0is1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e2fx3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f43ql")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+split_offset = 160
+dragger_visibility = 1
+
+[node name="play" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_d8qij")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ppeok")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1xfj6")
+text = "▶"
+
+[node name="fastforward" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rvpa4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rcbwp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_met80")
+text = "▶▶"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 990.0
+offset_right = 256.0
+offset_bottom = 1014.0
+color = Color(0.87451, 0.87451, 0.87451, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 990.0
+offset_right = 273.0
+offset_bottom = 1014.0
+color = Color(0.87451, 0.87451, 0.87451, 1)
+
+[node name="Controls" type="Sprite2D" parent="."]
+position = Vector2(411, 724)
+scale = Vector2(0.34, 0.32)
+texture = ExtResource("3_7wiq8")
+
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size/HSplit_Height/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size/HSplit_Height/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Freq/HSplit_Freq/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Update/update" to="." method="_on_update_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Default/default" to="." method="_on_default_pressed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Health/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Energy/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Size/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Speed/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Mass/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Attack/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_Defence/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist/HSplitContainer/HSplitContainer/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/Margin_LOSDist/HSplitContainer/HSplitContainer/Label" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer/HSplitContainer/HSplitContainer/addbtn" to="." method="_on_addbtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_AddCreatures/HSplitContainer/HSplitContainer/HSplitContainer/clearbtn" to="." method="_on_clearbtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer/pre1" to="." method="_on_pre_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer/pre2" to="." method="_on_pre_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer/pre3" to="." method="_on_pre_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HBoxContainer/pre4" to="." method="_on_pre_4_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HSplitContainer/savetbtn" to="." method="_on_savetbtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Creatures/Vbox_Creatures/PanelContainer/VBoxContainer/Margin_Presets/HSplitContainer/HSplitContainer/defaultbtn" to="." method="_on_defaultbtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer/HSplitContainer/HSplitContainer/addbtnfood" to="." method="_on_addbtnfood_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_AddFood/HSplitContainer/HSplitContainer/HSplitContainer/clearbtnfood" to="." method="_on_clearbtnfood_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Food/PanelContainer/VBoxContainer/Margin_Default/defaultbtnfood" to="." method="_on_defaultbtnfood_pressed"]
+[connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin/HSplit/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin3/playsim" to="." method="_on_playsim_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin4/resetsim" to="." method="_on_resetsim_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings/Margin5/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer/pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer/HSplitContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/HSplitContainer/HSplitContainer/fastforward" to="." method="_on_fastforward_pressed"]

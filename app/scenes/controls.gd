@@ -6,10 +6,12 @@ extends Node3D
 @onready var sim_world = get_node("../../../simulation_origin")
 @onready var playerOrigin = get_node("../../")
 
+
 var scale_step:float = 0.1
 
 var right_bool = false
 var left_bool = false
+var gui_visible = false
 
 func _on_right_controller_button_pressed(name):
 	if(name == "by_button"):
@@ -18,6 +20,7 @@ func _on_right_controller_button_pressed(name):
 func _on_left_controller_button_pressed(name):
 	if(name == "by_button"):
 		left_bool = true
+		
 
 func _on_right_controller_button_released(name):
 	if(name == "by_button"):
@@ -34,5 +37,8 @@ func _process(delta):
 	
 	if right_bool:
 		playerOrigin.world_scale += scale_step
+		playerOrigin.world_scale = clamp(playerOrigin.world_scale,0.2,4)
+		
 	elif left_bool:
 		playerOrigin.world_scale -= scale_step
+		playerOrigin.world_scale = clamp(playerOrigin.world_scale,0.2,4)

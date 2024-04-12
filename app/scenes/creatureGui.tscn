@@ -1,0 +1,317 @@
+[gd_scene load_steps=9 format=3 uid="uid://3osnkntqyaq6"]
+
+[ext_resource type="Script" path="res://scenes/creatureGui.gd" id="1_m7suh"]
+
+[sub_resource type="Theme" id="Theme_ok6kq"]
+default_font_size = 25
+
+[sub_resource type="FontVariation" id="FontVariation_78h75"]
+variation_embolden = 0.44
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6a6p"]
+font = SubResource("FontVariation_78h75")
+font_size = 60
+font_color = Color(0.105882, 0.105882, 0.105882, 1)
+outline_size = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8ey8n"]
+color = Color(1, 1, 1, 1)
+thickness = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urvbi"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 0.631373)
+
+[sub_resource type="FontVariation" id="FontVariation_8q7v2"]
+spacing_top = 10
+spacing_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5uat"]
+bg_color = Color(0.533333, 0.0352941, 0.0313726, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CreatureGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ok6kq")
+script = ExtResource("1_m7suh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 836.0
+offset_bottom = 808.0
+color = Color(0.352941, 0.756863, 1, 0.529412)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 832.0
+offset_bottom = 797.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Creature Info"
+label_settings = SubResource("LabelSettings_c6a6p")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 21
+theme_override_styles/separator = SubResource("StyleBoxLine_8ey8n")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_urvbi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HSplitContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HSplitContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "CREATURE ID:"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HSplitContainer2"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HSplitContainer2/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "1"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offset = 415
+dragger_visibility = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="cgui_colour" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_colour"]
+layout_mode = 2
+split_offset = 140
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_colour/HSplitContainer"]
+layout_mode = 2
+text = "Color: "
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_colour/HSplitContainer"]
+layout_mode = 2
+text = "Brown"
+
+[node name="cgui_health" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_health"]
+layout_mode = 2
+split_offset = 140
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_health/HSplitContainer"]
+layout_mode = 2
+text = "Health:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_health/HSplitContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="cgui_energy" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_energy"]
+layout_mode = 2
+split_offset = 140
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_energy/HSplitContainer"]
+layout_mode = 2
+text = "Energy:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_energy/HSplitContainer"]
+layout_mode = 2
+text = "200"
+
+[node name="cgui_size" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_size"]
+layout_mode = 2
+split_offset = 140
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_size/HSplitContainer"]
+layout_mode = 2
+text = "Size:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_size/HSplitContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="cgui_speed" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_speed"]
+layout_mode = 2
+split_offset = 140
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_speed/HSplitContainer"]
+layout_mode = 2
+text = "Speed:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_speed/HSplitContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="cgui_mass" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 59
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_mass"]
+layout_mode = 2
+split_offset = 140
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_mass/HSplitContainer"]
+layout_mode = 2
+text = "Mass:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer/cgui_mass/HSplitContainer"]
+layout_mode = 2
+text = "80"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="cgui_diet" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_diet"]
+layout_mode = 2
+split_offset = 90
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_diet/HSplitContainer"]
+layout_mode = 2
+text = "Diet:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_diet/HSplitContainer"]
+layout_mode = 2
+text = "Herbivore"
+
+[node name="cgui_atk" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_atk"]
+layout_mode = 2
+split_offset = 190
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_atk/HSplitContainer"]
+layout_mode = 2
+text = "Attack Power:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_atk/HSplitContainer"]
+layout_mode = 2
+text = "4"
+
+[node name="cgui_def" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_def"]
+layout_mode = 2
+split_offset = 190
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_def/HSplitContainer"]
+layout_mode = 2
+text = "Defence Power:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_def/HSplitContainer"]
+layout_mode = 2
+text = "4"
+
+[node name="cgui_los" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_los"]
+layout_mode = 2
+split_offset = 160
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_los/HSplitContainer"]
+layout_mode = 2
+text = "Line of Sight Distance:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HSplitContainer/VBoxContainer2/cgui_los/HSplitContainer"]
+layout_mode = 2
+text = "5"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 20.0
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 10
+
+[node name="kill" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_8q7v2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_s5uat")
+text = "KILL CREATURE"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/kill" to="." method="_on_kill_pressed"]

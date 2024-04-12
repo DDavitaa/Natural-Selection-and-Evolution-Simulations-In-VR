@@ -9,9 +9,10 @@ radius = 1.1295
 [sub_resource type="SphereMesh" id="SphereMesh_o4gp1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7jsq"]
-albedo_color = Color(1, 0.396078, 0.968627, 1)
+albedo_color = Color(0, 1, 0, 1)
 
 [node name="food" type="Area3D" groups=["food_area"]]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 script = ExtResource("1_gk8fa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -21,5 +22,8 @@ shape = SubResource("CylinderShape3D_c64pg")
 mesh = SubResource("SphereMesh_o4gp1")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_t7jsq")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+visible = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
