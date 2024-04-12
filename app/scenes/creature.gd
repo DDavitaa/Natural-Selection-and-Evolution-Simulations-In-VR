@@ -478,6 +478,8 @@ func _on_fight_state_physics_processing(delta):
 			if elapsed_time_buffLock > 7:
 				buffLock = false
 	
+	update_energy()
+	
 	rotation = Vector3(0,rotation.y,0)
 	
 	var current_location = global_position
@@ -502,6 +504,8 @@ func _on_flee_state_physics_processing(delta):
 		var new_target_position = global_position + escape_direction * safe_distance
 		update_target_location(new_target_position)
 		look_at(new_target_position, Vector3.UP)
+		
+	update_energy()
 	
 	rotation = Vector3(0,rotation.y,0)
 	
@@ -553,7 +557,11 @@ func _on_still_state_processing(delta):
 func _on_find_mate_state_physics_processing(delta):
 	$spriteIcon.texture = findMateIcon
 	
-	isWandering = false
+	isWandering = true
+	
+	# if energy levels drop below 50%, then look for food
+	if (ENERGY < (gui_ENERGY*0.5) or HEALTH < (gui_HEALTH*0.5)) and isWandering:
+		$StateChart.send_event("lookforfood")
 	
 	if !located_creature:
 		$StateChart.send_event("wander")
@@ -565,7 +573,7 @@ func _on_find_mate_state_physics_processing(delta):
 			$spriteIcon.texture = heartIcon
 			
 			
-	
+	update_energy()
 	
 	rotation = Vector3(0,rotation.y,0)
 	
