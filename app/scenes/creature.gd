@@ -226,7 +226,7 @@ func calculate_combat_confidence():
 	var base_confidence = (normalized_health * 0.4 + normalized_energy * 0.4)
 	
 	var size_difference = SIZE - located_creature.SIZE
-	var size_modifier = clamp(size_difference / 10.0, -0.2, 0.2)
+	var size_modifier = clamp(size_difference / 10.0, -0.1, 0.1)
 	
 	var combat_confidence = base_confidence + ego_boost + size_modifier
 	combat_confidence = clamp(combat_confidence, 0.0, 1.0)
@@ -250,8 +250,8 @@ func calculate_reproduction():
 	
 	var healths = [parent1.gui_HEALTH,parent2.gui_HEALTH]
 	var energies = [parent1.gui_ENERGY,parent2.gui_ENERGY]
-	var sizes = [parent1.SIZE,parent2.gui_ENERGY]
-	var speeds = [parent1.SPEED,parent2.gui_ENERGY]
+	var sizes = [parent1.SIZE,parent2.SIZE]
+	var speeds = [parent1.SPEED,parent2.SPEED]
 	var masses = [parent1.MASS,parent2.MASS]
 	var attacks = [parent1.ATK,parent2.ATK]
 	var defences = [parent1.DEF,parent2.DEF]
@@ -272,7 +272,10 @@ func calculate_reproduction():
 	var offspring_diet = diets[rng.randi() % 2]
 	
 	terrain.gen_offspring(parent1,offspring_health,offspring_energy,offspring_size,offspring_speed,offspring_mass,offspring_atk,offspring_def,offspring_los,offspring_diet)
-
+	
+	parent1.get_node("StateChart").send_event("wander")
+	parent2.get_node("StateChart").send_event("wander")
+	
 # LOCATING FOOD ---------------------------------------
 func _on_line_of_sight_area_area_entered(area):
 	# prevents another food from being tracked
@@ -445,8 +448,6 @@ func _on_fight_state_physics_processing(delta):
 	
 	isWandering = false
 	
-	
-	
 	if !located_creature:
 		$StateChart.send_event("wander")
 	else:
@@ -477,6 +478,7 @@ func _on_fight_state_physics_processing(delta):
 			elapsed_time_buffLock += delta
 			if elapsed_time_buffLock > 7:
 				buffLock = false
+				elapsed_time_buffLock = 0.0
 	
 	update_energy()
 	

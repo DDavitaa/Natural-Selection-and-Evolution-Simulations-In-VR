@@ -1181,6 +1181,11 @@ layout_mode = 2
 text = "Note: you cannot start the simulation with the play button
 below."
 
+[node name="Controls" type="Sprite2D" parent="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Settings"]
+position = Vector2(396, 529.018)
+scale = Vector2(0.395452, 0.35229)
+texture = ExtResource("3_7wiq8")
+
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7xlvx")
@@ -1237,11 +1242,6 @@ offset_top = 990.0
 offset_right = 273.0
 offset_bottom = 1014.0
 color = Color(0.87451, 0.87451, 0.87451, 1)
-
-[node name="Controls" type="Sprite2D" parent="."]
-position = Vector2(411, 724)
-scale = Vector2(0.34, 0.32)
-texture = ExtResource("3_7wiq8")
 
 [connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size/HSplit_Height/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Size/HSplit_Size/HSplit_Height/Label" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/HSlider" to="VBoxContainer/MarginContainer/VBoxContainer/TAB_CONTAINER/Environment/Margin_Height/HSplit_Height/HSplit_Height/Label" method="_on_h_slider_value_changed"]
