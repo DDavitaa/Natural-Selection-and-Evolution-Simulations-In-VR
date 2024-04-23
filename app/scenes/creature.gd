@@ -91,6 +91,7 @@ var inherited_DEF = []
 var inherited_LINEOFSIGHT_DIST = []
 var inherited_IS_CARNIVORE = []
 
+var is_offspring = false
 
 # ICONS
 var wanderIcon = preload("res://textures/steps-icon.png")
@@ -102,16 +103,11 @@ var heartIcon = preload("res://textures/red-heart-icon.png")
 var deadIcon = preload("res://textures/skull-icon.png")
 
 var rng = RandomNumberGenerator.new()
-var label = Label3D.new()
 var creature_color = StandardMaterial3D.new()
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _ready():
-	label.scale = Vector3(3,3,3)
-	
-	add_child(label)
-	
+func _ready():	
 	creature_color.albedo_color = colour_codes[gui_COLOUR]
 	$CollisionShape3D/MeshInstance3D.set_surface_override_material(0,creature_color)
 	
@@ -120,26 +116,22 @@ func _physics_process(delta):
 	# gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		
+	
+	velocity.y -= gravity * delta
 	
 func _process(delta):
 	
 	# LABELS AND BARS
-	label.global_position = global_position
-	label.global_position.y += 0.7
 
 	if rootNode.is_using_xr:
-		label.look_at(xrcam.global_position, Vector3.UP)
 		$spriteIcon.look_at(xrcam.global_position, Vector3.UP)
 		$sprite_healthbar.look_at(xrcam.global_position, Vector3.UP)
 		infoGui.look_at(xrcam.global_position, Vector3.UP)
 	else:
-		label.look_at(cam.global_position, Vector3.UP)
 		$spriteIcon.look_at(cam.global_position, Vector3.UP)
 		$sprite_healthbar.look_at(cam.global_position, Vector3.UP)
 		infoGui.look_at(cam.global_position, Vector3.UP)
 
-	label.rotate_object_local(Vector3.UP, PI)
 	$sprite_healthbar.rotate_object_local(Vector3.UP, PI)
 	infoGui.rotate_object_local(Vector3.UP, PI)
 	
@@ -147,8 +139,6 @@ func _process(delta):
 	healthbar.value = HEALTH
 	energybar.max_value = gui_ENERGY
 	energybar.value = ENERGY
-
-	label.text = "CREATURE ID: " + str(creature_id)
 	
 	# -------- stats processing ----------
 	elapsed_time_WANDER += delta
@@ -555,6 +545,9 @@ func _on_still_state_processing(delta):
 	IS_CARNIVORE = gui_IS_CARNIVORE
 	
 	scale = Vector3(SIZE,SIZE,SIZE)
+	
+	if is_offspring:
+		$StateChart.send_event("still_to_wander")
 
 func _on_find_mate_state_physics_processing(delta):
 	$spriteIcon.texture = findMateIcon

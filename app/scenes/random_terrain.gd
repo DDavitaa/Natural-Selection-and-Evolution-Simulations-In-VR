@@ -136,7 +136,10 @@ func gen_offspring(parent,o_health,o_energy,o_size,o_speed,o_mass,o_atk,o_def,o_
 	creature_instance.gui_LOS = o_los
 	creature_instance.gui_IS_CARNIVORE = o_diet
 	
-	creature_instance.get_node("StateChart").send_event("wander")
+	get_tree().paused = false
+	creature_instance.get_node("StateChart").send_event("still_to_wander")
+	creature_instance.is_offspring = true
+	
 
 func reproduction(parent):
 	var parentlock = false
